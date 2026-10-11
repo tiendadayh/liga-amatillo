@@ -1511,6 +1511,7 @@ footer{border-top:5px solid var(--accent)}
             <a href="#jugadores-sec">Jugadores</a>
             <a href="#equipos-arbitros-sec">Equipos y Árbitros</a>
             <a href="#reglamento-sec">Reglamento</a>
+            <a href="#requisitos-sec">Requisitos</a>
             <a href="#registro-sec">Inscribirse</a>
         </div>
     </nav>
@@ -1749,6 +1750,28 @@ footer{border-top:5px solid var(--accent)}
             <div id="reglamento-publico-body"></div>
         </section>
 
+        <!-- REQUISITOS Y PREMIACIÓN -->
+        <section id="requisitos-sec" class="card-section" style="border-top-color: #1f5fd6;">
+            <h2>📋 Requisitos de Inscripción</h2>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; align-items:stretch;">
+                <div style="background:linear-gradient(160deg,#0f2a5c,#1f5fd6); color:#fff; border-radius:16px; padding:20px;">
+                    <h3 style="margin:0 0 12px; font-size:1.15rem; letter-spacing:.5px;">REQUISITOS</h3>
+                    <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; font-weight:700;">
+                        <li>✅ Acta de nacimiento</li>
+                        <li>✅ INE del tutor</li>
+                        <li>✅ Cuota <span style="color:#ffd54a;">$500</span> <span style="font-weight:400; font-size:0.85rem;">por equipo</span></li>
+                    </ul>
+                </div>
+                <div style="background:linear-gradient(160deg,#fff8dc,#ffe9a8); color:#3b2f00; border:1px solid #f0c24b; border-radius:16px; padding:20px; text-align:center; display:flex; flex-direction:column; justify-content:center; gap:4px;">
+                    <div style="font-size:3rem; line-height:1;">🏆</div>
+                    <div style="font-weight:800; letter-spacing:1px;">PREMIACIÓN</div>
+                    <div style="font-size:2.2rem; font-weight:900; color:#1f5fd6; line-height:1.1;">$15,000</div>
+                    <div style="font-weight:700;">A REPARTIR</div>
+                </div>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:14px;">La cuota la paga cada equipo a la administración de la liga. Una vez reunidos los documentos, el dueño/representante de tu equipo puede registrarte en la sección <a href="#registro-sec">Inscribirse</a>.</p>
+        </section>
+
         <!-- REGISTRO DE JUGADORES DESDE LA WEB PÚBLICA -->
         <section id="registro-sec" class="card-section" style="border-top-color: #4caf50;">
             <h2>📝 Solicitud de Registro de Jugador</h2>
@@ -1826,13 +1849,26 @@ footer{border-top:5px solid var(--accent)}
                         <img id="sol-foto-preview" src="" alt="" style="display:none; width:100px; height:100px; border-radius:50%; object-fit:cover; border:2px solid var(--primary);">
                     </div>
                 </div>
+                <div class="campo-solicitud campo-solicitud-full" style="border:1px solid var(--border); border-radius:10px; padding:12px 14px; background:var(--light);">
+                    <label style="font-weight:700;">📋 Requisitos de inscripción</label>
+                    <small style="display:block; margin-bottom:10px;">Sube una foto clara (legible y completa) de cada documento. Solo la administración de la liga puede verlos.</small>
+                    <div class="campo-solicitud">
+                        <label>✅ Acta de nacimiento del jugador</label>
+                        <input type="file" id="sol-acta" accept="image/*" required>
+                    </div>
+                    <div class="campo-solicitud">
+                        <label>✅ INE del tutor (por el frente)</label>
+                        <input type="file" id="sol-ine-tutor" accept="image/*" required>
+                    </div>
+                    <small style="display:block; margin-top:6px;">💵 La cuota de inscripción ($500) se paga por equipo y se entrega a la administración de la liga; no se captura aquí.</small>
+                </div>
                 <div class="campo-solicitud campo-solicitud-full">
                     <details style="background:var(--light); border:1px solid var(--border); border-radius:8px; padding:10px 14px; font-size:0.82rem;">
                         <summary style="cursor:pointer; font-weight:600;">📄 Aviso de Privacidad (léelo antes de enviar tu solicitud)</summary>
                         <div style="margin-top:10px; line-height:1.5; color:#555;">
-                            <p>La <span class="nombre-liga-txt">Liga Amatillo Sub 15 Sabatina</span> recaba los datos de este formulario (nombre, número, categoría, posición, lugar y fecha de nacimiento, nacionalidad y fotografía) con la única finalidad de gestionar tu registro como jugador, elaborar tu credencial oficial y mostrar tu información deportiva (nombre, foto, número y estadísticas) en el sitio público de la liga.</p>
+                            <p>La <span class="nombre-liga-txt">Liga Amatillo Sub 15 Sabatina</span> recaba los datos de este formulario (nombre, número, categoría, posición, lugar y fecha de nacimiento, nacionalidad, fotografía, acta de nacimiento, INE del tutor) con la única finalidad de gestionar tu registro como jugador, elaborar tu credencial oficial y mostrar tu información deportiva (nombre, foto, número y estadísticas) en el sitio público de la liga.</p>
                             <p>Estos datos no se venden ni se comparten con terceros ajenos a la liga. Puedes solicitar la corrección o eliminación de tus datos contactando a la administración de la liga.</p>
-                            <p><b>Menores de edad:</b> en el sitio público se muestran el nombre, la foto, el número, el equipo, las estadísticas deportivas, el lugar y la fecha de nacimiento del jugador. Los datos del padre, madre o tutor (nombre y teléfono) se guardan en un espacio privado al que solo accede la administración de la liga.</p>
+                            <p><b>Menores de edad:</b> en el sitio público se muestran el nombre, la foto, el número, el equipo, las estadísticas deportivas, el lugar y la fecha de nacimiento del jugador. El acta de nacimiento, el INE del tutor y los datos del padre, madre o tutor (nombre y teléfono) nunca se muestran en el sitio público: se guardan en un espacio privado al que solo accede la administración de la liga.</p>
                             <p>Todas las solicitudes son revisadas y deben ser aprobadas por la administración de la liga antes de quedar registradas.</p>
                         </div>
                     </details>
@@ -1887,6 +1923,7 @@ footer{border-top:5px solid var(--accent)}
                 <a href="#posiciones-sec">Tabla de Posiciones</a>
                 <a href="#ofensiva-defensiva-sec">Ofensiva / Defensiva</a>
                 <a href="#reglamento-sec">Reglamento</a>
+            <a href="#requisitos-sec">Requisitos</a>
             </div>
             <div class="footer-col">
                 <h4>Estadísticas</h4>
@@ -2251,6 +2288,7 @@ footer{border-top:5px solid var(--accent)}
                     'jugadores-sec': 'Fichas de Jugadores',
                     'equipos-arbitros-sec': 'Equipos y Árbitros',
                     'reglamento-sec': 'Reglamento',
+                    'requisitos-sec': 'Requisitos y Premiación',
                     'registro-sec': 'Solicitud de Registro'
                 };
 
@@ -3075,6 +3113,11 @@ footer{border-top:5px solid var(--accent)}
                     return mostrarToast("Este equipo ya alcanzó el máximo de 15 jugadores (contando solicitudes pendientes de aprobar). Elige otro equipo o contacta al administrador.", "error");
                 }
                 const fotoB64 = await convertirImagenABase64(document.getElementById('sol-foto'));
+                const actaB64 = await convertirImagenABase64(document.getElementById('sol-acta'), 1400);
+                const ineB64 = await convertirImagenABase64(document.getElementById('sol-ine-tutor'), 1400);
+                if (!actaB64 || !ineB64) {
+                    return mostrarToast("Sube la foto del acta de nacimiento y la del INE del tutor para poder enviar la solicitud.", "error", 6000);
+                }
                 if(!db.solicitudes) db.solicitudes = [];
                 const nuevaSolicitud = {
                     id: Date.now(),
@@ -3087,6 +3130,8 @@ footer{border-top:5px solid var(--accent)}
                     fechaNacimiento: document.getElementById('sol-fecha-nac').value,
                     nacionalidad: document.getElementById('sol-nacionalidad').value.trim().toUpperCase() || 'MEXICANA',
                     foto: fotoB64,
+                    actaNacimiento: actaB64,
+                    ineTutor: ineB64,
                     avisoPrivacidadAceptado: true,
                     imagenAutorizada: true,
                     deslindeAceptado: true,
@@ -5497,7 +5542,7 @@ footer{border-top:5px solid var(--accent)}
                     <h3>¿Quién cuida tus datos?</h3>
                     <p><b>${c.responsable}</b> (la "Liga")${c.domicilio ? ', con domicilio en ' + c.domicilio : ''}. Si tienes dudas o quieres hacer una solicitud, escríbenos ${legalContacto()}.</p>
                     <h3>¿Qué datos te pedimos?</h3>
-                    <p><b>Para identificarte:</b> nombre completo, fecha y lugar de nacimiento, nacionalidad y una fotografía.</p>
+                    <p><b>Para identificarte:</b> nombre completo, fecha y lugar de nacimiento, nacionalidad y una fotografía. Para validar tu inscripción también pedimos una foto del acta de nacimiento, una foto del INE de tu padre, madre o tutor; estos documentos solo los ve la administración de la liga y no se publican.</p>
                     <p><b>Del torneo:</b> tu equipo, número de playera, posición, categoría, goles, tarjetas, sanciones, multas y estadísticas.</p>
                     <p><b>Si eres menor de 18 años:</b> también el nombre de tu mamá, papá o tutor, que es quien te autoriza a jugar.</p>
                     <p><b>Lo que NO pedimos:</b> datos de salud, religión, ideas políticas, preferencias personales ni huellas o reconocimiento facial. Tu foto solo sirve para tu credencial y tu ficha.</p>
