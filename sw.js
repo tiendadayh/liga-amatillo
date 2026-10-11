@@ -1,10 +1,10 @@
-/* Service Worker - Liga de Futbol Juvenil (Sub-15)
+/* Service Worker - Liga Amatillo Sub 15 Sabatina (Sub-15)
    - Páginas (HTML): primero internet, y si no hay conexión usa la última copia guardada.
    - Íconos y manifest: primero la copia guardada (carga rápida).
    - Firebase y librerías externas NO se tocan (siempre van directo a internet),
      así los marcadores y datos en vivo nunca quedan viejos.
    Para forzar que todos reciban una versión nueva, cambia el número de CACHE. */
-const CACHE = 'liga-sub15-v1';
+const CACHE = 'liga-amatillo-v2';
 const BASICOS = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (e) => {
@@ -18,7 +18,7 @@ self.addEventListener('install', (e) => {
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys()
-      .then((claves) => Promise.all(claves.filter((k) => k.indexOf('liga-sub15-') === 0 && k !== CACHE).map((k) => caches.delete(k))))
+      .then((claves) => Promise.all(claves.filter((k) => k.indexOf('liga-amatillo-') === 0 && k !== CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });

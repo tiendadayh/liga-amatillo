@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
-<head><script>try{if(localStorage.getItem('liga_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
+<head><script>try{if(localStorage.getItem('liga_sub15_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liga de Futbol Acapulco - Sitio Oficial</title>
-    <meta name="description" content="Sitio oficial de la Liga de Futbol Acapulco: tabla de posiciones, resultados en vivo, fichas de jugadores y más.">
+    <title>Liga Amatillo Sub 15 Sabatina - Sitio Oficial</title>
+    <meta name="description" content="Sitio oficial de la Liga Amatillo Sub 15 Sabatina: tabla de posiciones, resultados en vivo, fichas de jugadores y más.">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Liga de Futbol Acapulco - Sitio Oficial">
-    <meta property="og:description" content="Tabla de posiciones, resultados en vivo, goleo y fichas de jugadores de la Liga de Futbol Acapulco.">
+    <meta property="og:title" content="Liga Amatillo Sub 15 Sabatina - Sitio Oficial">
+    <meta property="og:description" content="Tabla de posiciones, resultados en vivo, goleo y fichas de jugadores de la Liga Amatillo Sub 15 Sabatina.">
     <meta property="og:image" content="https://tiendadayh.github.io/Liga-Sub15/icon-512.png">
     <meta property="og:url" content="https://tiendadayh.github.io/Liga-Sub15/">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Liga de Futbol Acapulco - Sitio Oficial">
-    <meta name="twitter:description" content="Tabla de posiciones, resultados en vivo, goleo y fichas de jugadores de la Liga de Futbol Acapulco.">
+    <meta name="twitter:title" content="Liga Amatillo Sub 15 Sabatina - Sitio Oficial">
+    <meta name="twitter:description" content="Tabla de posiciones, resultados en vivo, goleo y fichas de jugadores de la Liga Amatillo Sub 15 Sabatina.">
     <meta name="twitter:image" content="https://tiendadayh.github.io/Liga-Sub15/icon-512.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1455,9 +1455,9 @@ footer{border-top:5px solid var(--accent)}
         <div class="header-shine" id="header-shine"></div>
         <div class="site-header-content">
             <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='white' stroke='%230b2f5c' stroke-width='4'/><polygon points='50,30 69,44 62,66 38,66 31,44' fill='%230b2f5c'/><path d='M50 30V6M69 44L92 36M62 66L77 86M38 66L23 86M31 44L8 36' stroke='%230b2f5c' stroke-width='4' fill='none'/></svg>"
-                alt="Escudo Liga de Futbol Acapulco" class="site-header-logo">
+                alt="Escudo Liga Amatillo Sub 15 Sabatina" class="site-header-logo">
             <div>
-                <h1 id="nombre-liga-h1">LIGA DE FUTBOL ACAPULCO</h1>
+                <h1 id="nombre-liga-h1">LIGA AMATILLO SUB 15 SABATINA</h1>
                 <p>Portal Oficial</p>
             </div>
         </div>
@@ -1503,6 +1503,7 @@ footer{border-top:5px solid var(--accent)}
             <a href="#ofensiva-defensiva-sec">Ofensiva/Defensiva</a>
             <a href="#goleo-sec">Goleo</a>
             <a href="#goleo-liguilla-sec" id="nav-link-goleo-liguilla" class="hidden">Goleo Liguilla</a>
+            <a href="#asistencias-sec">Asistencias</a>
             <a href="#disciplina-sec">Disciplina</a>
             <a href="#porteros-sec">Guante de Oro</a>
             <a href="#headtohead-sec">Cara a Cara</a>
@@ -1607,6 +1608,7 @@ footer{border-top:5px solid var(--accent)}
                             <tbody id="tabla-ofensiva-body"></tbody>
                         </table>
                     </div>
+                    <div style="text-align:center; margin-top:10px;"><button type="button" class="btn btn-outline btn-sm btn-pill" id="btn-vermas-of" onclick="alternarVerTodos('of')" style="display:none;"></button></div>
                 </div>
                 <div>
                     <h3 style="margin:0 0 8px; color:#c62828;">🛡️ Mejor Defensiva (Menos Goles Recibidos)</h3>
@@ -1616,6 +1618,7 @@ footer{border-top:5px solid var(--accent)}
                             <tbody id="tabla-defensiva-body"></tbody>
                         </table>
                     </div>
+                    <div style="text-align:center; margin-top:10px;"><button type="button" class="btn btn-outline btn-sm btn-pill" id="btn-vermas-def" onclick="alternarVerTodos('def')" style="display:none;"></button></div>
                 </div>
             </div>
         </section>
@@ -1631,6 +1634,20 @@ footer{border-top:5px solid var(--accent)}
                     <tbody id="tabla-goleo-body"></tbody>
                 </table>
             </div>
+            <div style="text-align:center; margin-top:10px;"><button type="button" class="btn btn-outline btn-sm btn-pill" id="btn-vermas-goleo" onclick="alternarVerTodos('goleo')" style="display:none;"></button></div>
+        </section>
+
+        <!-- ASISTENCIAS -->
+        <section id="asistencias-sec" class="card-section">
+            <h2>Asistencias <span class="badge-fase">Toda la temporada</span></h2>
+            <div class="podio-wrap" id="podio-asistencias"></div>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead><tr><th>Pos</th><th>Jugador</th><th>Equipo</th><th>Asistencias 🅰️</th></tr></thead>
+                    <tbody id="tabla-asistencias-body"></tbody>
+                </table>
+            </div>
+            <div style="text-align:center; margin-top:10px;"><button type="button" class="btn btn-outline btn-sm btn-pill" id="btn-vermas-asistencias" onclick="alternarVerTodos('asistencias')" style="display:none;"></button></div>
         </section>
 
         <!-- GOLEO DE LIGUILLA (solo se muestra con la Liguilla activa) -->
@@ -1645,13 +1662,14 @@ footer{border-top:5px solid var(--accent)}
                     <tbody id="tabla-goleo-liguilla-body"></tbody>
                 </table>
             </div>
+            <div style="text-align:center; margin-top:10px;"><button type="button" class="btn btn-outline btn-sm btn-pill" id="btn-vermas-goleo-liguilla" onclick="alternarVerTodos('goleo-liguilla')" style="display:none;"></button></div>
         </section>
 
         <!-- DISCIPLINA -->
         <section id="disciplina-sec" class="card-section">
             <h2>Tabla de Disciplina <span class="badge-fase">Fase Regular</span></h2>
 
-            <h3 style="margin:0 0 8px; color:var(--accent);">🏅 Fair Play por Equipo <span class="badge-fase">Fase Regular</span></h3>
+            <h3 style="margin:0 0 8px; color:var(--accent);">🏅 Fair Play por Equipo</h3>
             <p style="font-size:0.85rem; color:var(--text-muted); margin-top:-4px;">Ranking del equipo con menos sanciones acumuladas (1 punto por amarilla, 3 por roja). El más limpio va arriba.</p>
             <div style="overflow-x:auto; margin-bottom:22px;">
                 <table class="tabla-equipos">
@@ -1659,16 +1677,19 @@ footer{border-top:5px solid var(--accent)}
                     <tbody id="tabla-fairplay-equipo-body"></tbody>
                 </table>
             </div>
+            <div style="text-align:center; margin:-10px 0 22px;"><button type="button" class="btn btn-outline btn-sm btn-pill" id="btn-vermas-disc-equipos" onclick="alternarVerTodos('disc-equipos')" style="display:none;">Ver todos los equipos</button></div>
 
-            <h3 style="margin:0 0 8px;">Disciplina Individual <span class="badge-fase">Fase Regular</span></h3>
+            <h3 style="margin:0 0 8px;">Disciplina Individual</h3>
             <p style="font-size:0.8rem; color:var(--text-muted); margin-top:-4px;">Top 3 con más tarjetas acumuladas (1 punto por amarilla, 3 por roja).</p>
             <div class="podio-wrap" id="podio-disciplina"></div>
+            <div id="aviso-riesgo-disciplina" style="display:none; background:rgba(224,147,46,0.15); border:1px solid var(--warning); color:var(--text); border-radius:var(--radius-sm); padding:9px 12px; font-size:0.85rem; margin:10px 0;"></div>
             <div style="overflow-x:auto;">
                 <table>
-                    <thead><tr><th>Pos</th><th>Jugador</th><th>Equipo</th><th>🟨 Amarillas</th><th>🟥 Rojas</th><th>Estatus</th></tr></thead>
+                    <thead><tr><th>Pos</th><th>Jugador</th><th>Equipo</th><th>🟨 Amarillas</th><th>🟥 Rojas</th><th>💲 Multa</th><th>Estatus</th></tr></thead>
                     <tbody id="tabla-disciplina-body"></tbody>
                 </table>
             </div>
+            <div style="text-align:center; margin-top:10px;"><button type="button" class="btn btn-outline btn-sm btn-pill" id="btn-vermas-disc-jugadores" onclick="alternarVerTodos('disc-jugadores')" style="display:none;">Ver todos los jugadores</button></div>
         </section>
 
         <!-- PORTEROS MENOS GOLEADOS (GUANTE DE ORO) -->
@@ -1683,6 +1704,7 @@ footer{border-top:5px solid var(--accent)}
                     <tbody id="tabla-porteros-body"></tbody>
                 </table>
             </div>
+            <div style="text-align:center; margin-top:10px;"><button type="button" class="btn btn-outline btn-sm btn-pill" id="btn-vermas-porteros" onclick="alternarVerTodos('porteros')" style="display:none;"></button></div>
         </section>
 
         <!-- COMPARADOR HEAD TO HEAD -->
@@ -1808,9 +1830,9 @@ footer{border-top:5px solid var(--accent)}
                     <details style="background:var(--light); border:1px solid var(--border); border-radius:8px; padding:10px 14px; font-size:0.82rem;">
                         <summary style="cursor:pointer; font-weight:600;">📄 Aviso de Privacidad (léelo antes de enviar tu solicitud)</summary>
                         <div style="margin-top:10px; line-height:1.5; color:#555;">
-                            <p>La <span class="nombre-liga-txt">Liga de Futbol Acapulco</span> recaba los datos de este formulario (nombre, número, categoría, posición, lugar y fecha de nacimiento, nacionalidad y fotografía) con la única finalidad de gestionar tu registro como jugador, elaborar tu credencial oficial y mostrar tu información deportiva (nombre, foto, número y estadísticas) en el sitio público de la liga.</p>
+                            <p>La <span class="nombre-liga-txt">Liga Amatillo Sub 15 Sabatina</span> recaba los datos de este formulario (nombre, número, categoría, posición, lugar y fecha de nacimiento, nacionalidad y fotografía) con la única finalidad de gestionar tu registro como jugador, elaborar tu credencial oficial y mostrar tu información deportiva (nombre, foto, número y estadísticas) en el sitio público de la liga.</p>
                             <p>Estos datos no se venden ni se comparten con terceros ajenos a la liga. Puedes solicitar la corrección o eliminación de tus datos contactando a la administración de la liga.</p>
-                            <p><b>Menores de edad:</b> en el sitio público solo se muestran el nombre, la foto, el número, el equipo y las estadísticas deportivas del jugador. La fecha y el lugar de nacimiento y los datos del padre, madre o tutor solo los ve la administración de la liga.</p>
+                            <p><b>Menores de edad:</b> en el sitio público se muestran el nombre, la foto, el número, el equipo, las estadísticas deportivas, el lugar y la fecha de nacimiento del jugador. Los datos del padre, madre o tutor (nombre y teléfono) se guardan en un espacio privado al que solo accede la administración de la liga.</p>
                             <p>Todas las solicitudes son revisadas y deben ser aprobadas por la administración de la liga antes de quedar registradas.</p>
                         </div>
                     </details>
@@ -1833,7 +1855,7 @@ footer{border-top:5px solid var(--accent)}
                         <input type="tel" id="sol-tutor-tel" placeholder="Teléfono del padre, madre o tutor (10 dígitos)" inputmode="numeric" maxlength="15" style="width:100%; margin-bottom:6px;">
                         <label style="display:flex; align-items:flex-start; gap:8px; font-size:0.82rem; font-weight:normal;">
                             <input type="checkbox" id="sol-tutor-acepta" style="margin-top:3px;">
-                            <span>Soy el padre, madre o tutor legal del jugador, autorizo su participación y el uso de su imagen, y acepto en su nombre el Aviso de Privacidad, el Deslinde de Responsabilidad y los Términos.</span>
+                            <span>Soy el padre, madre o tutor legal del jugador, autorizo su participación, el uso de su imagen y la publicación de su lugar y fecha de nacimiento en la ficha pública, y acepto en su nombre el Aviso de Privacidad, el Deslinde de Responsabilidad y los Términos.</span>
                         </label>
                     </div>
                 </div>
@@ -1846,8 +1868,8 @@ footer{border-top:5px solid var(--accent)}
     <footer class="site-footer" id="site-footer">
         <div class="footer-top">
             <div class="footer-brand">
-                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='white' stroke='%230b2f5c' stroke-width='4'/><polygon points='50,30 69,44 62,66 38,66 31,44' fill='%230b2f5c'/><path d='M50 30V6M69 44L92 36M62 66L77 86M38 66L23 86M31 44L8 36' stroke='%230b2f5c' stroke-width='4' fill='none'/></svg>" alt="Escudo Liga de Futbol Acapulco" class="footer-logo">
-                <h3 id="nombre-liga-footer">LIGA DE FUTBOL ACAPULCO</h3>
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='white' stroke='%230b2f5c' stroke-width='4'/><polygon points='50,30 69,44 62,66 38,66 31,44' fill='%230b2f5c'/><path d='M50 30V6M69 44L92 36M62 66L77 86M38 66L23 86M31 44L8 36' stroke='%230b2f5c' stroke-width='4' fill='none'/></svg>" alt="Escudo Liga Amatillo Sub 15 Sabatina" class="footer-logo">
+                <h3 id="nombre-liga-footer">LIGA AMATILLO SUB 15 SABATINA</h3>
                 <p>Portal oficial del torneo: calendario, resultados en vivo, tabla de posiciones, estadísticas y fichas de jugadores, actualizados al instante.</p>
                 <div class="footer-redes">
                     <a href="#tablon-sec" title="Tablón de Avisos" aria-label="Tablón de Avisos">📢</a>
@@ -1870,6 +1892,7 @@ footer{border-top:5px solid var(--accent)}
                 <h4>Estadísticas</h4>
                 <a href="#goleo-sec">Goleo Individual</a>
                 <a href="#goleo-liguilla-sec">Goleo de Liguilla</a>
+                <a href="#asistencias-sec">Asistencias</a>
                 <a href="#disciplina-sec">Disciplina</a>
                 <a href="#porteros-sec">Guante de Oro</a>
                 <a href="#headtohead-sec">Comparador Cara a Cara</a>
@@ -1888,7 +1911,7 @@ footer{border-top:5px solid var(--accent)}
         </div>
         <hr class="footer-divider">
         <div class="footer-bottom">
-            <p>© <span id="footer-anio"></span> <span class="nombre-liga-txt">Liga de Futbol Acapulco</span>. Todos los derechos reservados.</p>
+            <p>© <span id="footer-anio"></span> <span class="nombre-liga-txt">Liga Amatillo Sub 15 Sabatina</span>. Todos los derechos reservados.</p>
             <p class="footer-credito">Sitio desarrollado por Alexis Brayan Carlos Ponce</p>
             <p class="footer-legal" style="display:flex; flex-wrap:wrap; gap:6px 14px; justify-content:center; font-size:0.8rem;">
                 <a href="#" onclick="abrirLegal('privacidad'); return false;">Aviso de Privacidad</a>
@@ -1966,8 +1989,8 @@ footer{border-top:5px solid var(--accent)}
                         <div class="ficha-dato-item"><span class="ficha-dato-label">Categoría</span><span class="ficha-dato-valor" id="modal-categoria">—</span></div>
                         <div class="ficha-dato-item"><span class="ficha-dato-label">Edad</span><span class="ficha-dato-valor" id="modal-edad">—</span></div>
                         <div class="ficha-dato-item"><span class="ficha-dato-label">Nacionalidad</span><span class="ficha-dato-valor" id="modal-nacionalidad">—</span></div>
-                        <div class="ficha-dato-item" style="display:none"><span class="ficha-dato-label">Lugar de nacimiento</span><span class="ficha-dato-valor" id="modal-lugar-nac">—</span></div>
-                        <div class="ficha-dato-item" style="display:none"><span class="ficha-dato-label">Fecha de nacimiento</span><span class="ficha-dato-valor" id="modal-fecha-nac">—</span></div>
+                        <div class="ficha-dato-item"><span class="ficha-dato-label">Lugar de nacimiento</span><span class="ficha-dato-valor" id="modal-lugar-nac">—</span></div>
+                        <div class="ficha-dato-item"><span class="ficha-dato-label">Fecha de nacimiento</span><span class="ficha-dato-valor" id="modal-fecha-nac">—</span></div>
                         <div class="ficha-dato-item" style="grid-column:1 / -1;"><span class="ficha-dato-label">Fecha de alta en la liga</span><span class="ficha-dato-valor" id="modal-fecha-alta">—</span></div>
                     </div>
 
@@ -2499,7 +2522,7 @@ footer{border-top:5px solid var(--accent)}
             });
         }
 
-        const NOMBRE_LIGA_DEFAULT = 'Liga de Futbol Acapulco';
+        const NOMBRE_LIGA_DEFAULT = 'Liga Amatillo Sub 15 Sabatina';
         function nombreLigaActual() {
             const n = (typeof db !== 'undefined' && db && db.config && db.config.nombreLiga) ? String(db.config.nombreLiga).trim() : '';
             return (!n || /cosmar/i.test(n)) ? NOMBRE_LIGA_DEFAULT : n;
@@ -2534,6 +2557,26 @@ footer{border-top:5px solid var(--accent)}
             partidosRojaDirecta: 1, multaRojaDirecta: 0,
             notasAdicionales: ''
         };
+        // ===== "Ver todos": las tablas de ranking muestran el top 5 y un boton para expandir =====
+        var VER_TODOS_TOP = 5;
+        var verTodosEstado = {};
+        function verTodosLista(clave, lista) { return verTodosEstado[clave] ? lista : lista.slice(0, VER_TODOS_TOP); }
+        function verTodosBoton(clave, total, texto) {
+            var b = document.getElementById('btn-vermas-' + clave);
+            if (!b) return;
+            if (total <= VER_TODOS_TOP) { b.style.display = 'none'; return; }
+            b.style.display = '';
+            b.textContent = verTodosEstado[clave] ? 'Ver solo el top ' + VER_TODOS_TOP : texto + ' (' + total + ')';
+        }
+        function alternarVerTodos(clave) {
+            verTodosEstado[clave] = !verTodosEstado[clave];
+            if (clave === 'of' || clave === 'def') renderizarOfensivaDefensiva();
+            else if (clave === 'goleo') actualizarVistaGoleo();
+            else if (clave === 'goleo-liguilla') actualizarVistaGoleoLiguilla();
+            else if (clave === 'asistencias') actualizarVistaAsistencias();
+            else if (clave === 'porteros') renderizarPorteros();
+            else actualizarVistaDisciplina();
+        }
         // Numero de jornadas de la fase regular (se configura en Admin > Reglamento; por defecto 9).
         // Las jornadas 1..N son fase regular; de la 98 en adelante es Liguilla.
         function jornadasFaseRegular(dbRef) {
@@ -2541,6 +2584,12 @@ footer{border-top:5px solid var(--accent)}
             return (n >= 1 && n <= 60) ? n : 9;
         }
         function reg(dbRef, campo) {
+            const v = dbRef.reglamento && dbRef.reglamento[campo];
+            if (campo === 'amarillasParaAcumulada' && !(Number(v) >= 1)) return REGLAMENTO_DEFAULTS[campo];   // 0 = sin definir: la lógica de tarjetas usa el valor seguro
+            return (v === undefined || v === null || v === '') ? REGLAMENTO_DEFAULTS[campo] : v;
+        }
+        // Valor tal como lo guardó el admin (permite 0), para mostrarlo/editarlo sin que lo cambie el valor seguro de arriba.
+        function regRaw(dbRef, campo) {
             const v = dbRef.reglamento && dbRef.reglamento[campo];
             return (v === undefined || v === null || v === '') ? REGLAMENTO_DEFAULTS[campo] : v;
         }
@@ -2564,6 +2613,7 @@ footer{border-top:5px solid var(--accent)}
             if (!obj.patrocinadores) obj.patrocinadores = [];
             if (!obj.xiIdealAdmin) obj.xiIdealAdmin = {};
             if (obj.registrosCerrados === undefined) obj.registrosCerrados = false;
+            if (!obj.periodoAltas || typeof obj.periodoAltas !== 'object') obj.periodoAltas = { activo: false, inicio: '', fin: '' };
             if (obj.liguillaActiva === undefined) obj.liguillaActiva = false;
             if (!obj.disciplinaOverrides) obj.disciplinaOverrides = {};
             if (!obj.reglamento) obj.reglamento = {};
@@ -2604,21 +2654,11 @@ footer{border-top:5px solid var(--accent)}
         // pública (sin iniciar sesión) sin tener que abrir el resto de la base de datos
         // (equipos, jugadores, partidos, finanzas, etc.), que sigue protegida.
         function enviarSolicitudAFirebase(nuevaSolicitud) {
-            recibiendoDeFirebase = true;
-            return firebaseDbRef.child('solicitudes').once('value')
-                .then(snapshot => {
-                    const actuales = snapshot.val() || [];
-                    const arrActuales = Array.isArray(actuales) ? actuales.slice() : Object.values(actuales);
-                    arrActuales.push(nuevaSolicitud);
-                    return firebaseDbRef.child('solicitudes').set(arrActuales);
-                })
-                .then(() => {
-                    if (!Array.isArray(db.solicitudes)) db.solicitudes = [];
-                    db.solicitudes.push(nuevaSolicitud);
-                    localStorage.setItem('liga_sub15_db', JSON.stringify(db));
-                })
-                .catch(err => { console.warn('No se pudo sincronizar la solicitud con Firebase', err); throw err; })
-                .finally(() => { recibiendoDeFirebase = false; });
+            // La solicitud (con foto y datos del padre/madre/tutor) se guarda en un nodo PRIVADO:
+            // cualquiera puede crear una solicitud nueva, pero solo el administrador con sesión
+            // iniciada puede leerlas. Ya no se lee ni se toca el resto de la base de datos pública.
+            return firebase.database().ref('sub15_privado/solicitudes/' + nuevaSolicitud.id).set(nuevaSolicitud)
+                .catch(err => { console.warn('No se pudo enviar la solicitud a Firebase', err); throw err; });
         }
 
         // ===== Alerta de gol en vivo =====
@@ -2627,7 +2667,7 @@ footer{border-top:5px solid var(--accent)}
         // (se recuerda en el dispositivo): 🔔 solo aviso en pantalla (por defecto) → 🔊 con sonido y
         // vibración → 🔕 apagado. El sonido es opcional a propósito: un sitio público no debe sonar
         // sin que la persona lo pida.
-        const CLAVE_ALERTA_GOL = 'ligaAlertaGol';
+        const CLAVE_ALERTA_GOL = 'sub15_ligaAlertaGol';
         const MODOS_ALERTA_GOL = ['aviso', 'sonido', 'off'];
         let golesConocidos = null;         // goles ya vistos ("partido:evento"); null = aún no llega la primera lectura (no avisar)
         let timerAlertaGol = null;
@@ -2865,7 +2905,7 @@ footer{border-top:5px solid var(--accent)}
                 const url = URL.createObjectURL(blob);
                 const enlace = document.createElement('a');
                 enlace.href = url;
-                enlace.download = automatico ? `liga_futbol_autoguardado_${fecha}_${hora}.json` : `liga_futbol_backup_${fecha}.json`;
+                enlace.download = automatico ? `liga_juvenil_autoguardado_${fecha}_${hora}.json` : `liga_juvenil_backup_${fecha}.json`;
                 document.body.appendChild(enlace);
                 enlace.click();
                 document.body.removeChild(enlace);
@@ -2989,6 +3029,14 @@ footer{border-top:5px solid var(--accent)}
             document.getElementById('form-solicitud-web').addEventListener('submit', async function(e) {
                 e.preventDefault();
                 if(db.registrosCerrados) return mostrarToast("Los registros se encuentran cerrados temporalmente.", "error");
+                {
+                    const per = db.periodoAltas || {};
+                    if (per.activo && (per.inicio || per.fin)) {
+                        const hoy = new Date().toLocaleDateString('sv-SE', { timeZone: 'America/Mexico_City' });
+                        if (per.inicio && hoy < per.inicio) return mostrarToast("El periodo de altas y bajas abre el " + per.inicio + ". Aún no se reciben solicitudes.", "error");
+                        if (per.fin && hoy > per.fin) return mostrarToast("El periodo de altas y bajas terminó el " + per.fin + ". Ya no se reciben solicitudes.", "error");
+                    }
+                }
                 if(!document.getElementById('sol-acepta-aviso').checked) {
                     return mostrarToast("Debes aceptar el Aviso de Privacidad para poder enviar la solicitud.", "error");
                 }
@@ -3108,6 +3156,43 @@ footer{border-top:5px solid var(--accent)}
             }
         });
 
+        // ===== Estadísticas de patrocinadores =====
+        // Guarda contadores por día en 'sub15_patro_stats/<idPatrocinador>/<AAAA-MM-DD>/{v,c}'
+        // (v = vistas del banner, c = clics). Es una ruta aparte de liga_sub15_db: no toca los
+        // datos de la liga. Una "vista" = una persona vio el carrusel en pantalla; se cuenta
+        // una sola vez por patrocinador en cada visita (pestaña) para no inflar el número.
+        const PATRO_VISTAS_SESION = new Set();
+        function fechaStatsPatro() {
+            try { return new Date().toLocaleDateString('sv-SE', { timeZone: 'America/Mexico_City' }); }
+            catch (e) { return new Date().toISOString().slice(0, 10); }
+        }
+        function sumarStatPatro(id, campo) {
+            try {
+                firebase.database().ref('sub15_patro_stats/' + id + '/' + fechaStatsPatro() + '/' + campo)
+                    .transaction(function (v) { return (v || 0) + 1; })
+                    .catch(function () {});
+            } catch (e) { /* sin conexión: no se cuenta, no pasa nada */ }
+        }
+        function registrarVistasPatrocinadores() {
+            (db.patrocinadores || []).forEach(function (p) {
+                if (PATRO_VISTAS_SESION.has(p.id)) return;
+                PATRO_VISTAS_SESION.add(p.id);
+                sumarStatPatro(p.id, 'v');
+            });
+        }
+        function registrarClicPatrocinador(id) { sumarStatPatro(id, 'c'); }
+        let patroObserver = null;
+        function vigilarVistaPatrocinadores(wrap) {
+            if (!('IntersectionObserver' in window)) { registrarVistasPatrocinadores(); return; }
+            if (patroObserver) patroObserver.disconnect();
+            patroObserver = new IntersectionObserver(function (entries) {
+                if (entries.some(function (e) { return e.isIntersecting; }) && document.visibilityState === 'visible') {
+                    registrarVistasPatrocinadores();
+                }
+            }, { threshold: 0.4 });
+            patroObserver.observe(wrap);
+        }
+
         // Dibuja el carrusel de patrocinadores en movimiento continuo (se oculta si no hay ninguno)
         function renderizarPatrocinadores() {
             const wrap = document.getElementById('patrocinadores-carrusel-wrap');
@@ -3117,7 +3202,7 @@ footer{border-top:5px solid var(--accent)}
 
             const itemsHtml = lista.map(p => {
                 const img = `<img src="${p.logo}" alt="${escapeHtml(p.nombre)}" title="${escapeHtml(p.nombre)}">`;
-                return `<div class="patrocinadores-item"><div class="patrocinador-nombre">${escapeHtml(p.nombre)}</div>${p.link ? `<a href="${p.link}" target="_blank" rel="noopener">${img}</a>` : img}</div>`;
+                return `<div class="patrocinadores-item"><div class="patrocinador-nombre">${escapeHtml(p.nombre)}</div>${p.link ? `<a href="${p.link}" target="_blank" rel="noopener" onclick="registrarClicPatrocinador(${p.id})">${img}</a>` : img}</div>`;
             }).join('');
             // Primero se dibuja UNA sola vez y se mide: si los patrocinadores caben en la pantalla
             // se muestran quietos y centrados (sin repetir); solo si no caben se duplica la lista
@@ -3127,6 +3212,7 @@ footer{border-top:5px solid var(--accent)}
             track.style.margin = '0 auto';
             track.innerHTML = itemsHtml;
             wrap.classList.remove('hidden');
+            vigilarVistaPatrocinadores(wrap);
             const imgs = Array.from(track.querySelectorAll('img'));
             Promise.all(imgs.map(im => im.complete ? Promise.resolve() : new Promise(r => { im.onload = im.onerror = r; }))).then(() => {
                 if (token !== renderizarPatrocinadores._t) return;
@@ -3143,6 +3229,7 @@ footer{border-top:5px solid var(--accent)}
         function contenidoReglamentoHTML() {
             const dato = (etiqueta, valor) => `<div><span style="display:block; font-size:0.75rem; color:var(--text-muted);">${etiqueta}</span><span style="display:block; font-weight:bold;">${valor}</span></div>`;
             const filaCuota = (etiqueta, valor) => dato(etiqueta, valor > 0 ? '$' + valor : 'Sin costo');
+            const textoSancion = (p, m, suf) => { const t = []; if (p > 0) t.push(`${p} partido(s)${suf}`); if (m > 0) t.push(`$${m}`); return t.length ? t.join(' + ') : 'Sin sanción definida'; };
             const rejilla = contenido => `<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:8px 16px; margin-bottom:10px;">${contenido}</div>`;
             const notas = reg(db, 'notasAdicionales');
             const seccion = (icono, titulo, contenidoHtml) => `
@@ -3152,10 +3239,10 @@ footer{border-top:5px solid var(--accent)}
                 </details>`;
             return (
                 seccion('⚽', 'Formato del partido', rejilla(
-                    dato('Duración', `${reg(db, 'numTiempos')} tiempos de ${reg(db, 'duracionMinutos')} min`) +
-                    dato('Fase regular', `${jornadasFaseRegular(db)} jornadas`) +
-                    dato('Tolerancia de llegada', `${reg(db, 'toleranciaMinutos')} min`) +
-                    dato('Jugadores', `${reg(db, 'jugadoresTitulares')} titulares + ${reg(db, 'jugadoresSuplentes')} suplentes`) +
+                    dato('Duración', (reg(db, 'numTiempos') > 0 && reg(db, 'duracionMinutos') > 0) ? `${reg(db, 'numTiempos')} tiempos de ${reg(db, 'duracionMinutos')} min` : 'Por definir') +
+                    dato('Fase regular', regRaw(db, 'jornadasRegulares') > 0 ? `${jornadasFaseRegular(db)} jornadas` : 'Por definir') +
+                    dato('Tolerancia de llegada', reg(db, 'toleranciaMinutos') > 0 ? `${reg(db, 'toleranciaMinutos')} min` : 'Sin tolerancia') +
+                    dato('Jugadores', reg(db, 'jugadoresTitulares') > 0 ? `${reg(db, 'jugadoresTitulares')} titulares` + (reg(db, 'jugadoresSuplentes') > 0 ? ` + ${reg(db, 'jugadoresSuplentes')} suplentes` : '') : 'Por definir') +
                     dato('Categoría', reg(db, 'categoriaTexto') || '—') +
                     (reg(db, 'balonOficial') ? dato('Balón oficial', reg(db, 'balonOficial')) : '')
                 )) +
@@ -3166,9 +3253,9 @@ footer{border-top:5px solid var(--accent)}
                 )) +
                 seccion('🟨🟥', 'Sanciones y multas',
                     rejilla(
-                        dato(`${reg(db, 'amarillasParaAcumulada')} amarillas acumuladas`, `${reg(db, 'partidosAmarillasAcumuladas')} partido(s) + $${reg(db, 'multaAmarillasAcumuladas')}`) +
-                        dato('Doble amarilla', `${reg(db, 'partidosDobleAmarilla')} partido(s) + $${reg(db, 'multaDobleAmarilla')}`) +
-                        dato('Roja directa', `${reg(db, 'partidosRojaDirecta')} partido(s) por defecto + $${reg(db, 'multaRojaDirecta')}`)
+                        dato(regRaw(db, 'amarillasParaAcumulada') > 0 ? `${regRaw(db, 'amarillasParaAcumulada')} amarillas acumuladas` : 'Amarillas acumuladas', textoSancion(reg(db, 'partidosAmarillasAcumuladas'), reg(db, 'multaAmarillasAcumuladas'), '')) +
+                        dato('Doble amarilla', textoSancion(reg(db, 'partidosDobleAmarilla'), reg(db, 'multaDobleAmarilla'), '')) +
+                        dato('Roja directa', textoSancion(reg(db, 'partidosRojaDirecta'), reg(db, 'multaRojaDirecta'), ' por defecto'))
                     ) +
                     `<p style="font-size:0.78rem; color:var(--text-muted);">Una roja directa puede subir de partidos (hasta expulsión definitiva del torneo) si fue por insultar al árbitro, escupir o iniciar una riña; lo decide la administración de la liga caso por caso.</p>`
                 ) +
@@ -3198,12 +3285,13 @@ footer{border-top:5px solid var(--accent)}
                 habilitado: { color: '#2e7d32', etiqueta: '✅ Habilitado' },
                 cronica: { color: '#1f8fd6', etiqueta: '📰 Crónica' },
                 registro: { color: '#2e7d32', etiqueta: '🆕 Registro' },
-                traspaso: { color: '#6a1b9a', etiqueta: '🔄 Traspaso' }
+                traspaso: { color: '#6a1b9a', etiqueta: '🔄 Traspaso' },
+                cumple: { color: '#e91e63', etiqueta: '🎂 Cumpleaños' }
             };
             // Todas las publicaciones del Tablón se muestran solo 1 día; pasado ese tiempo se ocultan
             // aunque el dato aún no se haya borrado de la base. Si no tienen 'ts' se usa su id (hora de creación).
             const DURACION_AVISO_MS = 24 * 60 * 60 * 1000;
-            const comunicadosVigentes = (db.comunicados || []).filter(c => (Date.now() - (c.ts || c.id || 0)) <= DURACION_AVISO_MS);
+            const comunicadosVigentes = (db.comunicados || []).filter(c => (c.tipo === 'sancion' && c.jugadorId) || (Date.now() - (c.ts || c.id || 0)) <= DURACION_AVISO_MS);
             // Equipos que menciona un aviso: "A vs B · ..." (partido programado) o cualquier equipo nombrado en el texto.
             const normNom = t => String(t || '').toLowerCase().replace(/\s+/g, ' ').trim();
             const equiposDeAviso = (c) => {
@@ -3228,7 +3316,27 @@ footer{border-top:5px solid var(--accent)}
                 return { eqs: hallados.slice(0, 2).map(h => h.e), vs: false };
             };
             const escudoAvisoHTML = (e) => `<div class=\"aviso-eq\"><img src=\"${e.escudo || 'https://placehold.co/52'}\" alt=\"${escapeHtml(e.nombre)}\" loading=\"lazy\"><span>${escapeHtml(e.nombre)}</span></div>`;
-            contNoticias.innerHTML = comunicadosVigentes.map(c => {
+            // Cumpleaños: avisos automáticos (no se guardan en la base) para los jugadores cuya fecha
+            // de nacimiento cae hoy. Desaparecen solos al día siguiente.
+            const hoyCumple = new Date();
+            const esBisiesto = y => (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
+            const avisosCumple = (db.jugadores || []).filter(j => {
+                const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(j.fechaNacimiento || '');
+                if (!m) return false;
+                let mes = +m[2], dia = +m[3];
+                if (mes === 2 && dia === 29 && !esBisiesto(hoyCumple.getFullYear())) dia = 28; // 29 de febrero: se festeja el 28
+                return mes === hoyCumple.getMonth() + 1 && dia === hoyCumple.getDate();
+            }).map(j => {
+                const edad = hoyCumple.getFullYear() - parseInt(j.fechaNacimiento.slice(0, 4), 10);
+                const eq = (db.equipos || []).find(e => e.id === j.equipoId);
+                return {
+                    id: 'cumple-' + j.id, tipo: 'cumple', jugadorId: j.id, ts: Date.now(),
+                    fecha: hoyCumple.toLocaleDateString('es-MX'),
+                    titulo: '🎂 ¡Feliz cumpleaños, ' + escapeHtml(j.nombre) + '!',
+                    contenido: (eq ? escapeHtml(eq.nombre) + ' celebra' : 'La liga celebra') + ' hoy' + (edad > 0 && edad < 100 ? ' los ' + edad + ' años' : '') + ' de ' + escapeHtml(j.nombre) + '. ¡Muchas felicidades! 🎉'
+                };
+            });
+            contNoticias.innerHTML = avisosCumple.concat(comunicadosVigentes).map(c => {
                 const et = estiloTipo[c.tipo] || estiloTipo.aviso;
                 // Si el aviso trae jugadorId y ese jugador sigue existiendo, la tarjeta
                 // muestra su foto y es clicable para abrir su ficha pública completa.
@@ -3236,6 +3344,9 @@ footer{border-top:5px solid var(--accent)}
                 const fotoJugador = jugadorAviso ? (jugadorAviso.foto || c.imagen) : null;
                 const equipoAviso = jugadorAviso ? (db.equipos.find(e => e.id === jugadorAviso.equipoId)?.nombre || 'Agente Libre') : '';
                 const abrirFicha = jugadorAviso ? `onclick="verFicha(${jugadorAviso.id})"` : '';
+                if (c.soloImagen && c.imagen && !jugadorAviso) {
+                    return `<div class="tablon-card-3d" style="background:#0b0b14; border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:var(--shadow-sm, 0 2px 8px rgba(0,0,0,0.06)); position:relative; cursor:zoom-in; line-height:0;" onclick="verImagenCompleta(this.querySelector('img').src, this.querySelector('img').alt)"><img src="${c.imagen}" alt="${escapeHtml(c.titulo || 'Aviso')}" style="width:100%; height:auto; max-height:520px; object-fit:contain; display:block;" loading="lazy"><span style="position:absolute; right:8px; bottom:8px; background:rgba(0,0,0,.65); color:#fff; font-size:.72rem; font-weight:700; padding:4px 10px; border-radius:999px; line-height:1.2;">🔍 Ver completa</span></div>`;
+                }
                 const avisoEq = jugadorAviso ? { eqs: [], vs: false } : equiposDeAviso(c);
                 const franjaEscudos = avisoEq.eqs.length
                     ? `<div class="aviso-escudos">${avisoEq.eqs.map(escudoAvisoHTML).join(avisoEq.vs ? '<span class="aviso-vs">VS</span>' : '')}</div>`
@@ -3250,7 +3361,7 @@ footer{border-top:5px solid var(--accent)}
                                    <span style="font-size:0.78rem; font-weight:600; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(jugadorAviso.nombre)} · ${equipoAviso}</span>
                                </div>
                            </div>`
-                        : (c.imagen ? `<img src="${c.imagen}" alt="${c.titulo}" style="width:100%; height:150px; object-fit:cover;" loading="lazy">` : '') + franjaEscudos
+                        : (c.imagen ? `<div style="position:relative; background:#0b0b14; cursor:zoom-in; line-height:0;" onclick="event.stopPropagation(); verImagenCompleta(this.querySelector('img').src, this.querySelector('img').alt)"><img src="${c.imagen}" alt="${c.titulo}" style="width:100%; height:auto; max-height:380px; object-fit:contain; display:block;" loading="lazy"><span style="position:absolute; right:8px; bottom:8px; background:rgba(0,0,0,.65); color:#fff; font-size:.72rem; font-weight:700; padding:4px 10px; border-radius:999px; line-height:1.2;">🔍 Ver completa</span></div>` : '') + franjaEscudos
                     }
                     <div style="padding:15px;">
                         <div style="display:flex; justify-content:${jugadorAviso ? 'flex-end' : 'space-between'}; align-items:center; gap:8px; margin-bottom:6px;">
@@ -3284,6 +3395,7 @@ footer{border-top:5px solid var(--accent)}
             renderizarFranjaEscudos();
             actualizarVistaGoleo();
             actualizarVistaGoleoLiguilla();
+            try { actualizarVistaAsistencias(); } catch (e) { console.warn('Asistencias:', e); }
             actualizarVistaDisciplina();
             filtrarJugadores();
             renderXI();
@@ -3661,7 +3773,7 @@ footer{border-top:5px solid var(--accent)}
         // ===== "Mi Equipo": el aficionado elige su equipo favorito (guardado en este
         // celular/navegador con localStorage, sin necesidad de cuenta) y lo resaltamos
         // en la Tabla de Posiciones, el Calendario y el mini marcador del header. =====
-        const CLAVE_EQUIPO_FAVORITO = 'ligaEquipoFavoritoId';
+        const CLAVE_EQUIPO_FAVORITO = 'sub15_ligaEquipoFavoritoId';
 
         // ----- Línea bajo el saludo: posición del equipo favorito y su próximo partido -----
         function fechaHoraPartido(p) {
@@ -3801,7 +3913,7 @@ footer{border-top:5px solid var(--accent)}
 
         // ----- Nombre del visitante (opcional): se guarda en este navegador y se envía a la presencia en vivo -----
         const CLAVE_NOMBRE_VISITANTE = 'sub15_ligaNombreVisitante';
-        const CLAVE_NOMBRE_OMITIDO = 'ligaNombreOmitido';
+        const CLAVE_NOMBRE_OMITIDO = 'sub15_ligaNombreOmitido';
 
         function obtenerNombreVisitante() {
             try { return String(localStorage.getItem(CLAVE_NOMBRE_VISITANTE) || '').trim().slice(0, 40); }
@@ -4092,7 +4204,9 @@ footer{border-top:5px solid var(--accent)}
             const ofensiva = [...estadisticas].sort((a, b) => b.gf - a.gf || a.gc - b.gc);
             const defensiva = [...estadisticas].sort((a, b) => a.gc - b.gc || b.gf - a.gf);
 
-            document.getElementById('tabla-ofensiva-body').innerHTML = ofensiva.length ? ofensiva.slice(0, 5).map((eq, idx) => `
+            verTodosBoton('of', ofensiva.length, 'Ver todos los equipos');
+            verTodosBoton('def', defensiva.length, 'Ver todos los equipos');
+            document.getElementById('tabla-ofensiva-body').innerHTML = ofensiva.length ? verTodosLista('of', ofensiva).map((eq, idx) => `
                 <tr>
                     <td><b>${idx + 1}</b></td>
                     <td><div class="equipo-celda"><img class="escudo-tab escudo-3d" src="${eq.escudo}" alt="${escapeHtml(eq.nombre)}" loading="lazy"><span>${escapeHtml(eq.nombre)}</span></div></td>
@@ -4100,7 +4214,7 @@ footer{border-top:5px solid var(--accent)}
                 </tr>
             `).join('') : estadoVacioFila(3, '⚽', 'Aún no hay partidos jugados.');
 
-            document.getElementById('tabla-defensiva-body').innerHTML = defensiva.length ? defensiva.slice(0, 5).map((eq, idx) => `
+            document.getElementById('tabla-defensiva-body').innerHTML = defensiva.length ? verTodosLista('def', defensiva).map((eq, idx) => `
                 <tr>
                     <td><b>${idx + 1}</b></td>
                     <td><div class="equipo-celda"><img class="escudo-tab escudo-3d" src="${eq.escudo}" alt="${escapeHtml(eq.nombre)}" loading="lazy"><span>${escapeHtml(eq.nombre)}</span></div></td>
@@ -4124,7 +4238,8 @@ footer{border-top:5px solid var(--accent)}
                 return { nombre: p.nombre, equipo: eq?.nombre || 'Libre', foto: p.foto, goles: golesContra, pj: partidos, prom: partidos > 0 ? (golesContra/partidos).toFixed(2) : 0 };
             }).sort((a,b) => a.prom - b.prom);
 
-            document.getElementById('tabla-porteros-body').innerHTML = data.slice(0, 5).map((pt, idx) => `
+            verTodosBoton('porteros', data.length, 'Ver todos los porteros');
+            document.getElementById('tabla-porteros-body').innerHTML = verTodosLista('porteros', data).map((pt, idx) => `
                 <tr>
                     <td><b>${idx+1}</b></td>
                     <td><div class="cel-jugador"><img class="foto-tabla" src="${pt.foto || 'https://placehold.co/34'}" alt="" loading="lazy"><span class="nombre-cel">${escapeHtml(pt.nombre)}</span><span class="equipo-cel">${escapeHtml(pt.equipo)}</span></div></td>
@@ -4792,13 +4907,44 @@ footer{border-top:5px solid var(--accent)}
             const ligStats = statsLiguillaPorJugador();
             { const av = document.getElementById('aviso-vivo-goleo'); if (av) av.classList.toggle('hidden', !hayPartidoEnVivo()); }
             let goleadores = db.jugadores.map(j => { const gv = golesVivo[j.id] || 0; return Object.assign({}, j, { goles: Math.max(0, (j.goles || 0) - ((ligStats[j.id] || {}).goles || 0)) + gv, golesVivo: gv }); }).filter(j => j.goles > 0).sort((a,b) => b.goles - a.goles);
+            verTodosBoton('goleo', goleadores.length, 'Ver todos los goleadores');
             document.getElementById('tabla-goleo-body').innerHTML = goleadores.length
-                ? goleadores.slice(0, 5).map((jug, idx) => `<tr><td><b>${idx + 1}</b></td><td><div class="cel-jugador"><img class="foto-tabla" src="${jug.foto || 'https://placehold.co/34'}" alt="" loading="lazy"><span class="nombre-cel">${escapeHtml(jug.nombre)}</span></div></td><td>${db.equipos.find(e => e.id === jug.equipoId)?.nombre || 'Libre'}</td><td><b>${jug.goles} ⚽</b> ${idx === 0 ? '🏆' : ''}${jug.golesVivo ? `<span class="pts-vivo pts-vivo-G">+${jug.golesVivo} en vivo</span>` : ''}</td></tr>`).join('')
+                ? verTodosLista('goleo', goleadores).map((jug, idx) => `<tr><td><b>${idx + 1}</b></td><td><div class="cel-jugador"><img class="foto-tabla" src="${jug.foto || 'https://placehold.co/34'}" alt="" loading="lazy"><span class="nombre-cel">${escapeHtml(jug.nombre)}</span></div></td><td>${db.equipos.find(e => e.id === jug.equipoId)?.nombre || 'Libre'}</td><td><b>${jug.goles} ⚽</b> ${idx === 0 ? '🏆' : ''}${jug.golesVivo ? `<span class="pts-vivo pts-vivo-G">+${jug.golesVivo} en vivo</span>` : ''}</td></tr>`).join('')
                 : estadoVacioFila(4, '⚽', 'Aún no hay goleadores; se llenará conforme se jueguen partidos.');
             renderPodio('podio-goleo', goleadores.map(jug => ({
                 foto: jug.foto, nombre: jug.nombre,
                 sub: db.equipos.find(e => e.id === jug.equipoId)?.nombre || 'Libre',
                 valor: jug.goles, unidad: 'Goles'
+            })));
+        }
+
+        // Asistencias: se cuentan de las incidencias de gol que el árbitro marcó con "asistencia"
+        // (incluye partidos jugados y en vivo). Devuelve {jugadorId: asistencias}.
+        function asistenciasPorJugador() {
+            const mapa = {};
+            (db.partidos || []).forEach(p => {
+                (p.eventos || []).filter(ev => ev && ev.tipo === 'gol' && ev.asistencia).forEach(ev => {
+                    const candidatos = (db.jugadores || []).filter(j => j.nombre === ev.asistencia);
+                    const j = candidatos.find(x => x.equipoId === p.localId || x.equipoId === p.visitaId) || candidatos[0];
+                    if (j) mapa[j.id] = (mapa[j.id] || 0) + 1;
+                });
+            });
+            return mapa;
+        }
+
+        function actualizarVistaAsistencias() {
+            const cuerpo = document.getElementById('tabla-asistencias-body');
+            if (!cuerpo) return;
+            const mapa = asistenciasPorJugador();
+            const lista = db.jugadores.map(j => Object.assign({}, j, { asistencias: mapa[j.id] || 0 })).filter(j => j.asistencias > 0).sort((a, b) => b.asistencias - a.asistencias);
+            verTodosBoton('asistencias', lista.length, 'Ver todos los asistidores');
+            cuerpo.innerHTML = lista.length
+                ? verTodosLista('asistencias', lista).map((jug, idx) => `<tr><td><b>${idx + 1}</b></td><td><div class="cel-jugador"><img class="foto-tabla" src="${jug.foto || 'https://placehold.co/34'}" alt="" loading="lazy"><span class="nombre-cel">${escapeHtml(jug.nombre)}</span></div></td><td>${escapeHtml(db.equipos.find(e => e.id === jug.equipoId)?.nombre || 'Libre')}</td><td><b>${jug.asistencias} 🅰️</b> ${idx === 0 ? '🏆' : ''}</td></tr>`).join('')
+                : estadoVacioFila(4, '🅰️', 'Aún no hay asistencias registradas; el árbitro las anota junto con cada gol.');
+            renderPodio('podio-asistencias', lista.map(jug => ({
+                foto: jug.foto, nombre: jug.nombre,
+                sub: db.equipos.find(e => e.id === jug.equipoId)?.nombre || 'Libre',
+                valor: jug.asistencias, unidad: 'Asist.'
             })));
         }
 
@@ -4816,8 +4962,9 @@ footer{border-top:5px solid var(--accent)}
             { const av = document.getElementById('aviso-vivo-goleo-liguilla'); if (av) av.classList.toggle('hidden', !Object.keys(golesVivo).length); }
             const goleadores = db.jugadores.map(j => { const gv = golesVivo[j.id] || 0; return Object.assign({}, j, { goles: ((ligStats[j.id] || {}).goles || 0) + gv, golesVivo: gv }); })
                 .filter(j => j.goles > 0).sort((a, b) => b.goles - a.goles);
+            verTodosBoton('goleo-liguilla', goleadores.length, 'Ver todos los goleadores');
             document.getElementById('tabla-goleo-liguilla-body').innerHTML = goleadores.length
-                ? goleadores.slice(0, 5).map((jug, idx) => `<tr><td><b>${idx + 1}</b></td><td><div class="cel-jugador"><img class="foto-tabla" src="${jug.foto || 'https://placehold.co/34'}" alt="" loading="lazy"><span class="nombre-cel">${escapeHtml(jug.nombre)}</span></div></td><td>${escapeHtml(db.equipos.find(e => e.id === jug.equipoId)?.nombre || 'Libre')}</td><td><b>${jug.goles} ⚽</b> ${idx === 0 ? '🏆' : ''}${jug.golesVivo ? `<span class="pts-vivo pts-vivo-G">+${jug.golesVivo} en vivo</span>` : ''}</td></tr>`).join('')
+                ? verTodosLista('goleo-liguilla', goleadores).map((jug, idx) => `<tr><td><b>${idx + 1}</b></td><td><div class="cel-jugador"><img class="foto-tabla" src="${jug.foto || 'https://placehold.co/34'}" alt="" loading="lazy"><span class="nombre-cel">${escapeHtml(jug.nombre)}</span></div></td><td>${escapeHtml(db.equipos.find(e => e.id === jug.equipoId)?.nombre || 'Libre')}</td><td><b>${jug.goles} ⚽</b> ${idx === 0 ? '🏆' : ''}${jug.golesVivo ? `<span class="pts-vivo pts-vivo-G">+${jug.golesVivo} en vivo</span>` : ''}</td></tr>`).join('')
                 : estadoVacioFila(4, '⚽', 'Aún no hay goles en la Liguilla; el goleo se llenará con los Cuartos de Final.');
             renderPodio('podio-goleo-liguilla', goleadores.map(jug => ({
                 foto: jug.foto, nombre: jug.nombre,
@@ -4826,16 +4973,86 @@ footer{border-top:5px solid var(--accent)}
             })));
         }
 
+        // ===== Ayudas para la tabla de disciplina: multa, "en riesgo" y ver todos =====
+        // Cuántas amarillas lleva el jugador en su "contador" actual (se reinicia con cada
+        // sanción y al pasar de fase regular a liguilla). Misma regla que calcularSancionesJugador.
+        function amarillasEnContadorActual(jugadorId, dbRef) {
+            let contador = 0, faseAnterior = null;
+            eventosTarjetasJugador(jugadorId, dbRef).forEach(ev => {
+                const fase = ev.jornada <= jornadasFaseRegular(dbRef) ? 'regular' : 'liguilla';
+                if (faseAnterior === 'regular' && fase === 'liguilla') contador = 0;
+                faseAnterior = fase;
+                if (ev.dobleAmarilla) { contador = 0; }
+                else {
+                    for (let i = 0; i < ev.amarillas; i++) {
+                        contador++;
+                        if (contador >= reg(dbRef, 'amarillasParaAcumulada')) contador = 0;
+                    }
+                }
+                if (ev.rojaDirecta) contador = 0;
+            });
+            return contador;
+        }
+
+        // Un jugador está "en riesgo" si una amarilla más lo suspende (y hoy está habilitado).
+        function jugadorEnRiesgoAmarillas(jugador) {
+            const limite = reg(db, 'amarillasParaAcumulada');
+            if (!(limite > 1)) return false;
+            const jornadaRef = Math.max(0, ...db.partidos.filter(p => p.jugado).map(p => p.jornada)) + 1;
+            if (estadoSuspensionJugador(jugador, db, jornadaRef).suspendido) return false;
+            const c = amarillasEnContadorActual(jugador.id, db);
+            return c > 0 && c === limite - 1;
+        }
+
+        // Multa por tarjetas del jugador. En la liga la multa se paga por equipo (se liquida en
+        // el admin), así que se muestra pendiente mientras el equipo tenga multas sin liquidar.
+        function multaTotalJugador(jugadorId) {
+            const montos = { doble_amarilla: 'multaDobleAmarilla', amarillas_acumuladas: 'multaAmarillasAcumuladas', roja_directa: 'multaRojaDirecta' };
+            return calcularSancionesJugador(jugadorId, db).reduce((sum, s) => sum + (reg(db, montos[s.tipo]) || 0), 0);
+        }
+
+        function multaPendienteDelEquipoPublica(equipoId) {
+            const total = (db.jugadores || []).filter(j => j.equipoId === equipoId).reduce((sum, j) => sum + multaTotalJugador(j.id), 0);
+            const liquidado = (db.finanzas && db.finanzas[equipoId] && db.finanzas[equipoId].multasLiquidadas) || 0;
+            return Math.max(0, total - liquidado);
+        }
+
+        function celdaMultaJugador(j) {
+            const monto = multaTotalJugador(j.id);
+            if (!monto) return '<span style="color:var(--text-muted);">Sin multa</span>';
+            if (multaPendienteDelEquipoPublica(j.equipoId) > 0) return '<b style="color:var(--danger);">$' + monto + '</b>';
+            return '<span style="color:var(--success);">Pagada</span>';
+        }
+
+        function celdaEstatusDisciplina(j) {
+            if (jugadorEnRiesgoAmarillas(j)) {
+                const faltan = reg(db, 'amarillasParaAcumulada') - 1;
+                return '<span style="color:var(--warning); font-weight:700;">⚠️ En riesgo (' + faltan + ' amarillas)</span>';
+            }
+            return textoEstadoSuspensionJugador(j);
+        }
+
         function actualizarVistaDisciplina() {
             const ligStatsDisc = statsLiguillaPorJugador();
             const jugadoresRegular = db.jugadores.map(j => { const l = ligStatsDisc[j.id] || {}; return Object.assign({}, j, { amarillas: Math.max(0, (j.amarillas || 0) - (l.amarillas || 0)), rojas: Math.max(0, (j.rojas || 0) - (l.rojas || 0)) }); });
-            const jugadoresOrdenados = [...jugadoresRegular].sort((a, b) => ((b.rojas || 0) * 3 + (b.amarillas || 0)) - ((a.rojas || 0) * 3 + (a.amarillas || 0)));
+            const jugadoresOrdenados = [...jugadoresRegular].sort((a, b) => ((b.rojas || 0) * 3 + (b.amarillas || 0)) - ((a.rojas || 0) * 3 + (a.amarillas || 0)) || (b.rojas || 0) - (a.rojas || 0));
             const jugadoresConTarjetas = jugadoresOrdenados.filter(j => (j.amarillas || 0) > 0 || (j.rojas || 0) > 0);
-            document.getElementById('tabla-disciplina-body').innerHTML = jugadoresConTarjetas.length ? jugadoresConTarjetas.slice(0, 5).map((j, idx) => {
-                return `<tr><td>${idx + 1}</td><td><div class="cel-jugador"><img class="foto-tabla" src="${j.foto || 'https://placehold.co/34'}" alt="" loading="lazy"><span class="nombre-cel">${escapeHtml(j.nombre)}</span></div></td><td>${db.equipos.find(e => e.id === j.equipoId)?.nombre || 'Libre'}</td><td>${j.amarillas || 0}</td><td>${j.rojas || 0}</td><td>${textoEstadoSuspensionJugador(j)}</td></tr>`;
-            }).join('') : estadoVacioFila(6, '🟨', 'Aún no hay tarjetas.');
-            const conSanciones = jugadoresOrdenados.filter(j => (j.amarillas || 0) > 0 || (j.rojas || 0) > 0);
-            renderPodio('podio-disciplina', conSanciones.map(j => ({
+            const visibles = verTodosLista('disc-jugadores', jugadoresConTarjetas);
+            document.getElementById('tabla-disciplina-body').innerHTML = visibles.length ? visibles.map((j, idx) => {
+                return `<tr><td>${idx + 1}</td><td><div class="cel-jugador"><img class="foto-tabla" src="${j.foto || 'https://placehold.co/34'}" alt="" loading="lazy"><span class="nombre-cel">${escapeHtml(j.nombre)}</span></div></td><td>${escapeHtml(db.equipos.find(e => e.id === j.equipoId)?.nombre || 'Libre')}</td><td>${j.amarillas || 0}</td><td>${j.rojas || 0}</td><td>${celdaMultaJugador(j)}</td><td>${celdaEstatusDisciplina(j)}</td></tr>`;
+            }).join('') : estadoVacioFila(7, '🟨', 'Aún no hay tarjetas.');
+            verTodosBoton('disc-jugadores', jugadoresConTarjetas.length, 'Ver todos los jugadores');
+
+            const enRiesgo = jugadoresConTarjetas.filter(j => jugadorEnRiesgoAmarillas(j));
+            const aviso = document.getElementById('aviso-riesgo-disciplina');
+            if (aviso) {
+                if (enRiesgo.length) {
+                    aviso.style.display = '';
+                    aviso.innerHTML = `⚠️ <b>${enRiesgo.length} jugador${enRiesgo.length > 1 ? 'es' : ''} en riesgo:</b> otra amarilla ${enRiesgo.length > 1 ? 'los suspende' : 'lo suspende'} — ` + enRiesgo.map(j => `${escapeHtml(j.nombre)} (${escapeHtml(db.equipos.find(e => e.id === j.equipoId)?.nombre || 'Libre')})`).join(', ');
+                } else { aviso.style.display = 'none'; aviso.innerHTML = ''; }
+            }
+
+            renderPodio('podio-disciplina', jugadoresConTarjetas.map(j => ({
                 foto: j.foto, nombre: j.nombre,
                 sub: db.equipos.find(e => e.id === j.equipoId)?.nombre || 'Libre',
                 valor: `${j.amarillas || 0}🟨 ${j.rojas || 0}🟥`, unidad: 'Sanciones'
@@ -4856,7 +5073,9 @@ footer{border-top:5px solid var(--accent)}
                 const rojas = jugadoresEq.reduce((s, j) => s + Math.max(0, (j.rojas || 0) - ((ligStatsFP[j.id] || {}).rojas || 0)), 0);
                 return { ...eq, amarillas, rojas, puntos: amarillas + rojas * 3 };
             }).sort((a, b) => a.puntos - b.puntos || a.rojas - b.rojas);
-            cont.innerHTML = fairPlay.length ? fairPlay.slice(0, 5).map((eq, idx) => `
+            const fairPlayVisibles = verTodosLista('disc-equipos', fairPlay);
+            verTodosBoton('disc-equipos', fairPlay.length, 'Ver todos los equipos');
+            cont.innerHTML = fairPlay.length ? fairPlayVisibles.map((eq, idx) => `
                 <tr>
                     <td><b>${idx + 1}</b></td>
                     <td><div class="equipo-celda"><img class="escudo-tab escudo-3d" src="${eq.escudo}" alt="${escapeHtml(eq.nombre)}" loading="lazy"><span>${escapeHtml(eq.nombre)}</span></div></td>
@@ -5255,9 +5474,9 @@ footer{border-top:5px solid var(--accent)}
         // ===== TEXTOS LEGALES (editar LEGAL_CONFIG con los datos reales de la liga) =====
         const EDAD_MIN_SUB = 7, EDAD_MAX_SUB = 15; // Rango de edad (años cumplidos) permitido en la liga sub 15
         const LEGAL_CONFIG = {
-            responsable: 'Liga de Futbol CoSmar SPORT CLUB',
+            responsable: 'Liga Amatillo Sub 15 Sabatina',
             domicilio: '',          // Ej. 'Calle y número, Colonia, C.P., Acapulco de Juárez, Guerrero'
-            correo: '',             // Ej. 'ligacosmar@correo.com'
+            correo: '',             // Ej. 'ligajuvenil@correo.com'
             whatsapp: '744 241 1773',
             ciudad: 'Acapulco de Juárez, Guerrero',
             version: '2026-10',
@@ -6277,7 +6496,7 @@ footer{border-top:5px solid var(--accent)}
 (function(){
 var PAGE='index';
 var root=document.documentElement;
-function guardar(){try{localStorage.setItem('liga_theme',root.getAttribute('data-theme')==='dark'?'dark':'light');}catch(e){}}
+function guardar(){try{localStorage.setItem('liga_sub15_theme',root.getAttribute('data-theme')==='dark'?'dark':'light');}catch(e){}}
 new MutationObserver(guardar).observe(root,{attributes:true,attributeFilter:['data-theme']});
 /* ===== Skeleton ===== */
 var skelFin=false;
@@ -6353,7 +6572,7 @@ if(PAGE==='index'){
 <aside id="liga-menu" aria-label="Menú de secciones"><header><b>Ir a…</b><button type="button" id="liga-menu-cerrar" aria-label="Cerrar">×</button></header><input id="liga-menu-buscar" type="search" placeholder="Buscar sección…" autocomplete="off"><ul id="liga-menu-lista"></ul></aside>
 <script id="liga-menu-js">
 (function(){
-var SEC=[['bracket-sec','Cuadro de Liguilla'],['tablon-sec','Tablón de Avisos'],['encuesta-sec','Encuestas Rápidas'],['jornadas-sec','Calendario y Resultados'],['quiniela-sec','Quiniela'],['posiciones-sec','Tabla de Posiciones'],['ofensiva-defensiva-sec','Ofensiva y Defensiva'],['goleo-sec','Goleo Individual'],['disciplina-sec','Tabla de Disciplina'],['porteros-sec','Portero con menos goles'],['headtohead-sec','Comparador Cara a Cara'],['xi-sec','XI MVP de la Semana'],['jugadores-sec','Fichas de Jugadores'],['equipos-arbitros-sec','Equipos y Árbitros'],['reglamento-sec','Reglamento'],['registro-sec','Solicitud de Registro']];
+var SEC=[['bracket-sec','Cuadro de Liguilla'],['tablon-sec','Tablón de Avisos'],['encuesta-sec','Encuestas Rápidas'],['jornadas-sec','Calendario y Resultados'],['quiniela-sec','Quiniela'],['posiciones-sec','Tabla de Posiciones'],['ofensiva-defensiva-sec','Ofensiva y Defensiva'],['goleo-sec','Goleo Individual'],['goleo-liguilla-sec','Goleo de Liguilla'],['asistencias-sec','Asistencias'],['disciplina-sec','Tabla de Disciplina'],['porteros-sec','Portero con menos goles'],['headtohead-sec','Comparador Cara a Cara'],['xi-sec','XI MVP de la Semana'],['jugadores-sec','Fichas de Jugadores'],['equipos-arbitros-sec','Equipos y Árbitros'],['reglamento-sec','Reglamento'],['registro-sec','Solicitud de Registro']];
 var lista=document.getElementById('liga-menu-lista'),buscar=document.getElementById('liga-menu-buscar');
 function visible(el){return el&&!el.classList.contains('hidden')&&el.offsetParent!==null;}
 function actual(){var best=null,bd=1e9;SEC.forEach(function(x){var e=document.getElementById(x[0]);if(!visible(e))return;var d=Math.abs(e.getBoundingClientRect().top-80);if(d<bd){bd=d;best=x[0];}});return best;}
@@ -6381,5 +6600,27 @@ lista.addEventListener('click',function(e){
 });
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('liga-menu-abierto'))cerrar();});
 })();
-</script></body>
+</script>
+<script>
+/* Visor de imágenes a pantalla completa (Tablón de Avisos) */
+function verImagenCompleta(src, alt){
+    var v=document.getElementById('visor-imagen-completa');
+    if(!v){
+        v=document.createElement('div'); v.id='visor-imagen-completa';
+        v.style.cssText='position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;padding:12px;box-sizing:border-box;cursor:zoom-out;';
+        v.innerHTML='<button type="button" aria-label="Cerrar" style="position:absolute;top:12px;right:12px;width:42px;height:42px;border-radius:50%;border:none;background:rgba(255,255,255,.18);color:#fff;font-size:1.3rem;cursor:pointer;">✕</button><img alt="" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;box-shadow:0 10px 40px rgba(0,0,0,.6);">';
+        v.addEventListener('click',cerrarImagenCompleta);
+        document.body.appendChild(v);
+        document.addEventListener('keydown',function(e){ if(e.key==='Escape') cerrarImagenCompleta(); });
+    }
+    var im=v.querySelector('img'); im.src=src; im.alt=alt||'';
+    v.style.display='flex'; document.body.style.overflow='hidden';
+}
+function cerrarImagenCompleta(){
+    var v=document.getElementById('visor-imagen-completa');
+    if(v){ v.style.display='none'; v.querySelector('img').src=''; }
+    document.body.style.overflow='';
+}
+</script>
+</body>
 </html>

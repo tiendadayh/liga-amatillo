@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head><script>try{if(localStorage.getItem('liga_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
+<head><script>try{if(localStorage.getItem('liga_sub15_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liga de Futbol Acapulco - Panel Avanzado Pro</title>
-    <meta name="description" content="Panel administrativo de la Liga de Futbol Acapulco: gestión de equipos, jugadores, partidos, credenciales y patrocinadores.">
+    <title>Liga Amatillo Sub 15 Sabatina - Panel Avanzado Pro</title>
+    <meta name="description" content="Panel administrativo de la Liga Amatillo Sub 15 Sabatina: gestión de equipos, jugadores, partidos, credenciales y patrocinadores.">
     <meta name="robots" content="noindex, nofollow">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Liga de Futbol Acapulco - Panel Avanzado Pro">
-    <meta property="og:description" content="Panel administrativo de la Liga de Futbol Acapulco.">
+    <meta property="og:title" content="Liga Amatillo Sub 15 Sabatina - Panel Avanzado Pro">
+    <meta property="og:description" content="Panel administrativo de la Liga Amatillo Sub 15 Sabatina.">
     <meta property="og:image" content="https://tiendadayh.github.io/Liga-Sub15/icon-512.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -362,6 +362,32 @@
         .btn-editar-fila { background: var(--secondary) !important; }
         .btn-ver-fila { background: var(--success) !important; }
         .btn-eliminar-fila { background: #b91c1c !important; }
+
+        /* ===== Comprobante de pago de arbitraje (QR) ===== */
+        .cp-ticket { width: 100%; max-width: 360px; margin: 0 auto; background: #fff; border-radius: 14px; overflow: hidden; border: 2px solid #f0b429; color: #12233f; font-family: system-ui, Segoe UI, Arial, sans-serif; }
+        .cp-head { background: linear-gradient(135deg, #0b2f5c, #7a0f14); color: #fff; padding: 14px 16px; text-align: center; }
+        .cp-head b { display: block; font-size: .95rem; letter-spacing: .06em; text-transform: uppercase; }
+        .cp-head span { font-size: .72rem; opacity: .85; }
+        .cp-sello { margin: 14px auto 4px; width: max-content; background: #dcfce7; color: #15803d; border: 2px solid #16a34a; border-radius: 999px; padding: 6px 18px; font-weight: 800; letter-spacing: .08em; font-size: .95rem; transform: rotate(-3deg); }
+        .cp-sello.anulado { background: #fee2e2; color: #b91c1c; border-color: #dc2626; }
+        .cp-monto { text-align: center; font-size: 2rem; font-weight: 800; color: #0b2f5c; margin: 2px 0 6px; }
+        .cp-monto small { display: block; font-size: .7rem; font-weight: 600; color: #6b7a90; letter-spacing: .06em; text-transform: uppercase; }
+        .cp-datos { padding: 4px 18px 8px; }
+        .cp-fila { display: flex; justify-content: space-between; gap: 10px; font-size: .82rem; padding: 6px 0; border-bottom: 1px dashed #d3dce8; }
+        .cp-fila span { color: #6b7a90; }
+        .cp-fila b { text-align: right; }
+        .cp-corte { border-top: 2px dashed #b8c4d6; margin: 8px 0; }
+        .cp-qr { padding: 8px 18px 16px; text-align: center; }
+        #cp-qr-box { display: inline-block; padding: 8px; background: #fff; border: 3px solid #0b2f5c; border-radius: 10px; }
+        .cp-qr p { margin: 8px 0 0; font-size: .72rem; color: #5b6b82; }
+        .cp-folio { font: 700 .85rem ui-monospace, Menlo, monospace; color: #0b2f5c; margin-top: 6px; letter-spacing: .08em; }
+        .cp-acciones { display: flex; gap: 8px; justify-content: center; margin-top: 14px; flex-wrap: wrap; }
+        @media print {
+            body.imp-comp > *:not(#modal-comprobante) { display: none !important; }
+            body.imp-comp #modal-comprobante { position: static !important; background: #fff !important; padding: 0 !important; display: block !important; height: auto !important; }
+            body.imp-comp #modal-comprobante .modal-box { box-shadow: none !important; max-width: none !important; max-height: none !important; overflow: visible !important; padding: 0 !important; }
+            body.imp-comp .cp-no-print { display: none !important; }
+        }
 
         .modal-overlay {
             position: fixed;
@@ -851,17 +877,19 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
     <div id="pantalla-login" style="position:fixed; inset:0; background:linear-gradient(135deg,#0d2a4d,#1a3a6b); z-index:99999; display:flex; align-items:center; justify-content:center; padding:20px;">
         <div style="background:#fff; border-radius:14px; padding:35px 30px; width:100%; max-width:340px; box-shadow:0 10px 40px rgba(0,0,0,0.3); text-align:center;">
             <h2 style="margin:0 0 6px; color:#0d2a4d;">🔒 Acceso Administrador</h2>
-            <p id="nombre-liga-login" style="font-size:0.85rem; color:#666; margin:0 0 18px;">Liga de Futbol Acapulco</p>
-            <input type="email" id="login-email" placeholder="Correo electrónico" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:8px; box-sizing:border-box;">
-            <input type="password" id="login-password" placeholder="Contraseña" style="width:100%; padding:10px; margin-bottom:14px; border:1px solid #ccc; border-radius:8px; box-sizing:border-box;">
+            <p id="nombre-liga-login" style="font-size:0.85rem; color:#666; margin:0 0 18px;">Liga Amatillo Sub 15 Sabatina</p>
+            <input type="email" id="login-email" data-no-mayus autocapitalize="none" placeholder="Correo electrónico" style="text-transform:none; width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:8px; box-sizing:border-box;">
+            <input type="password" id="login-password" data-no-mayus autocapitalize="none" autocomplete="current-password" placeholder="Contraseña" style="text-transform:none; width:100%; padding:10px; margin-bottom:8px; border:1px solid #ccc; border-radius:8px; box-sizing:border-box;">
+            <label style="display:flex; align-items:center; gap:6px; font-size:0.78rem; color:#555; margin:0 0 12px; text-align:left; cursor:pointer;"><input type="checkbox" onchange="document.getElementById('login-password').type = this.checked ? 'text' : 'password'" style="width:auto; margin:0;"> Mostrar contraseña</label>
             <button type="button" onclick="iniciarSesionAdmin()" style="width:100%; padding:11px; background:#ff9100; color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Entrar</button>
-            <p id="login-error-msg" style="color:#c62828; font-size:0.8rem; min-height:1.1em; margin:10px 0 0;"></p>
+            <p id="login-error-msg" style="color:#c62828; font-size:0.8rem; min-height:1.1em; margin:10px 0 0; text-align:left; line-height:1.45;"></p>
+            <button type="button" onclick="recuperarContrasenaAdmin()" style="background:none; color:#0d2a4d; border:none; font-size:0.78rem; text-decoration:underline; margin-top:8px; cursor:pointer; box-shadow:none;">¿Olvidaste tu contraseña? Enviar enlace al correo</button>
         </div>
     </div>
 
     <header>
         <div class="admin-header-content">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='white' stroke='%230b2f5c' stroke-width='4'/><polygon points='50,30 69,44 62,66 38,66 31,44' fill='%230b2f5c'/><path d='M50 30V6M69 44L92 36M62 66L77 86M38 66L23 86M31 44L8 36' stroke='%230b2f5c' stroke-width='4' fill='none'/></svg>" alt="Logo Liga de Futbol Acapulco" class="admin-header-logo">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='white' stroke='%230b2f5c' stroke-width='4'/><polygon points='50,30 69,44 62,66 38,66 31,44' fill='%230b2f5c'/><path d='M50 30V6M69 44L92 36M62 66L77 86M38 66L23 86M31 44L8 36' stroke='%230b2f5c' stroke-width='4' fill='none'/></svg>" alt="Logo Liga Amatillo Sub 15 Sabatina" class="admin-header-logo">
             <div>
                 <h1>🛠️ PANEL DE ADMINISTRACIÓN DE LA LIGA</h1>
                 <p>Respaldo, Publicacion, Liguilla, Solicitudes, Control Financiero, Correciones , Credenciales y Cedula</p>
@@ -964,6 +992,17 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
                 <input type="checkbox" id="check-cierre-registros" onchange="alternarRegistros(this.checked)"> Cerrar
                 Registro de Jugadores
             </label>
+            <div style="border-top:1px solid #cfe6e3; padding-top:10px;">
+                <label style="font-size:0.9rem; font-weight:bold; cursor:pointer;">
+                    <input type="checkbox" id="periodo-altas-activo" onchange="guardarPeriodoAltas()"> Usar periodo de altas y bajas
+                </label>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin:6px 0;">
+                    <div><label style="font-size:0.75rem;">Abre:</label><input type="date" id="periodo-altas-inicio" onchange="guardarPeriodoAltas()"></div>
+                    <div><label style="font-size:0.75rem;">Cierra (inclusive):</label><input type="date" id="periodo-altas-fin" onchange="guardarPeriodoAltas()"></div>
+                </div>
+                <p id="periodo-altas-estado" style="font-size:0.8rem; font-weight:bold; margin:4px 0 0;"></p>
+                <p style="font-size:0.72rem; color:#666; margin:4px 0 0;">Fuera de estas fechas no se pueden dar de alta, baja ni traspasar jugadores, y la página pública no recibe solicitudes. Como administrador puedes saltarte el bloqueo confirmando.</p>
+            </div>
         </div>
     </div>
 
@@ -991,6 +1030,36 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
                     </tr>
                 </thead>
                 <tbody id="tabla-control-financiero"></tbody>
+            </table>
+        </div>
+
+        <!-- Comprobantes de pago de arbitraje con QR -->
+        <h4 style="color:#2e7d32; margin:24px 0 6px;">🧾 Comprobantes de pago de arbitraje (con QR)</h4>
+        <p style="font-size:0.82rem; color:#555; margin:0 0 10px;">Cuando un equipo pague el arbitraje de su partido, genera aquí su comprobante (imprímelo o descárgalo en PDF y entrégaselo). El árbitro lo escanea con la cámara en la cédula y el sistema marca solo "Sí pagó". Cada comprobante sirve <b>una sola vez</b> y únicamente para <b>su partido</b>. Después de generarlo presiona "📤 Publicar cambios" para que el árbitro lo reconozca.</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:12px; margin-bottom:10px;">
+            <div><label>Partido</label><select id="cp-partido" onchange="cpActualizarEquipos()"></select></div>
+            <div><label>Equipo que paga</label><select id="cp-equipo"></select></div>
+            <div><label>Monto ($)</label><input type="number" id="cp-monto" min="0" oninput="this.dataset.tocado='1'"></div>
+            <div><label>Quién recibe el pago</label><input type="text" id="cp-recibio" placeholder="Nombre de quien cobra"></div>
+        </div>
+        <button type="button" onclick="generarComprobante()" style="background:#2e7d32;">🧾 Generar comprobante</button>
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:14px;">
+            <span style="font-size:0.78rem; color:#555;">El estado se actualiza solo cuando el árbitro escanea el comprobante.</span>
+            <button type="button" onclick="cpRevisarEscaneos(this)" style="padding:5px 10px; font-size:0.72rem; background:#0d2a4d;">🔄 Revisar ahora</button>
+        </div>
+        <div style="overflow-x:auto; margin-top:8px;">
+            <table style="width:100%; text-align:left; border-collapse:collapse; font-size:0.85rem;">
+                <thead>
+                    <tr style="background:#f4f4f4;">
+                        <th style="padding:8px;">Folio</th>
+                        <th>Equipo</th>
+                        <th>Partido</th>
+                        <th>Monto</th>
+                        <th>Estado</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-comprobantes"></tbody>
             </table>
         </div>
     </div>
@@ -1076,13 +1145,16 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             <h3 id="titulo-form-comunicado">Publicar Anuncio / Sanción</h3>
             <form id="form-comunicado">
                 <input type="hidden" id="editcom-id" value="">
+                <label style="display:flex; align-items:center; gap:8px; font-weight:700; cursor:pointer; margin-bottom:8px;">
+                    <input type="checkbox" id="com-solo-imagen" onchange="alternarSoloImagenComunicado()" style="width:auto; margin:0;"> 🖼️ Publicar solo la imagen (sin título ni texto)
+                </label>
                 <input type="text" id="com-titulo" placeholder="Título del Aviso" required>
                 <select id="com-tipo">
                     <option value="aviso">📢 Aviso General / Logística</option>
                     <option value="sancion">⚠️ Dictamen Disciplinario</option>
                 </select>
                 <textarea id="com-contenido" rows="3" placeholder="Redactar el texto aquí..." required></textarea>
-                <label>Portada:</label>
+                <label id="com-label-foto">Portada:</label>
                 <input type="file" id="com-foto" accept="image/*">
                 <small id="nota-foto-actual-comunicado" style="display:none; color:#888;">Deja este campo vacío para conservar la imagen actual.</small>
                 <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
@@ -1122,6 +1194,24 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             </form>
         </div>
 
+        <!-- ESTADÍSTICAS DE PATROCINADORES -->
+        <div class="admin-box" style="border-top-color:#ff9100;">
+            <h3>📊 Resultados para Patrocinadores</h3>
+            <p style="font-size:0.78rem; color:#666; margin:-4px 0 10px;"><b>Vistas</b> = personas que vieron el banner en pantalla (se cuenta una por visita). <b>Clics</b> = veces que tocaron el logo para ir a su enlace. Los números empiezan a contarse desde que publiques esta versión de la página.</p>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:10px;">
+                <select id="patro-stats-periodo" style="width:auto;" onchange="cargarStatsPatrocinadores()">
+                    <option value="7">Últimos 7 días</option>
+                    <option value="30" selected>Últimos 30 días</option>
+                    <option value="90">Últimos 90 días</option>
+                    <option value="0">Todo el tiempo</option>
+                </select>
+                <button type="button" id="btn-patro-stats" onclick="cargarStatsPatrocinadores()" style="background:#ff9100;">Actualizar</button>
+                <button type="button" onclick="descargarStatsPatrocinadoresCSV()" style="background:#64748b;">⬇️ Descargar CSV</button>
+                <button type="button" onclick="imprimirStatsPatrocinadores()" style="background:#0d2a4d;">🖨️ Imprimir / PDF</button>
+            </div>
+            <div id="patro-stats-resultado" style="overflow-x:auto; font-size:0.85rem;"></div>
+        </div>
+
         <!-- LOGO DEL SITIO (ENCABEZADO) -->
         <div class="admin-box" style="border-top-color:#0d2a4d;">
             <h3>🏷️ Identidad de la Liga (Nombre y Logo)</h3>
@@ -1148,7 +1238,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             <p style="font-size:0.8rem; color:#555; margin-top:-8px;">Estos datos se usan en todas las credenciales oficiales que imprimas. Se guardan una sola vez por temporada.</p>
             <form id="form-config-credencial">
                 <label>Nombre de la Liga (como debe aparecer en la credencial):</label>
-                <input type="text" id="cfg-nombre-liga" placeholder="Ej. LIGA DE FUTBOL ACAPULCO">
+                <input type="text" id="cfg-nombre-liga" placeholder="Ej. LIGA AMATILLO SUB 15 SABATINA">
                 <label>Encabezado línea 1 (Ej. FEDERACIÓN MEXICANA DE FÚTBOL ASOC., A.C.):</label>
                 <input type="text" id="cfg-asociacion" placeholder="Ej. FEDERACIÓN MEXICANA DE FÚTBOL ASOC., A.C.">
                 <label>Encabezado línea 2 (Ej. SECTOR AFICIONADO ASOCIACIÓN GUERRERO):</label>
@@ -1411,6 +1501,18 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             </table>
         </div>
         <p id="stats-correccion-vacio" class="hidden" style="color:gray; font-size:0.85rem; text-align:center; padding:10px;">No se encontró ningún jugador con ese nombre.</p>
+    </div>
+
+    <!-- MODAL: COMPROBANTE DE PAGO DE ARBITRAJE (QR) -->
+    <div id="modal-comprobante" class="modal-overlay" style="display:none;" onclick="if(event.target === this) cpCerrar()">
+        <div class="modal-box" style="max-width:420px;">
+            <div id="cp-modal-ticket"></div>
+            <div class="cp-acciones cp-no-print">
+                <button type="button" onclick="cpImprimir()">🖨️ Imprimir</button>
+                <button type="button" id="cp-btn-pdf" onclick="cpDescargarPDF(this)" style="background:#16a34a;">📄 Descargar PDF</button>
+                <button type="button" onclick="cpCerrar()" style="background:#64748b;">Cerrar</button>
+            </div>
+        </div>
     </div>
 
     <!-- MODAL: CONFIRMACIÓN (reemplaza los confirm() nativos del navegador) -->
@@ -1875,7 +1977,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             </div>
             <div>
                 <label>Página de Facebook que transmite:</label>
-                <input type="text" id="fb-live-pagina" placeholder="Ej. Liga de Futbol Acapulco (o el link de la página)">
+                <input type="text" id="fb-live-pagina" placeholder="Ej. Liga Amatillo Sub 15 Sabatina (o el link de la página)">
             </div>
         </div>
         <label style="display:flex; align-items:center; gap:8px; font-size:0.85rem; margin-top:12px; cursor:pointer;">
@@ -2059,34 +2161,61 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             } catch (err) { /* el navegador puede bloquear audio si no ha habido clic aún */ }
         }
 
-        firebaseDbRef.child('solicitudes').on('value', function (snapshot) {
-            const remotas = snapshot.val() || [];
-            if (!Array.isArray(db.solicitudes)) db.solicitudes = [];
-            if (primeraCargaSolicitudesFirebase) {
-                // Primera lectura al abrir la página: solo sincroniza, sin sonido ni aviso.
-                const idsLocales = new Set(db.solicitudes.map(s => s.id));
-                remotas.forEach(rs => { if (!idsLocales.has(rs.id)) db.solicitudes.push(rs); });
+        // --- Datos PRIVADOS: solo el administrador con sesión iniciada puede leerlos ---
+        // sub15_privado/solicitudes: solicitudes públicas de registro (foto y datos del padre/madre/tutor).
+        // sub15_privado/tutores: nombre y teléfono del padre/madre/tutor de cada jugador ya registrado.
+        // Estos datos NUNCA se publican en liga_sub15_db (que es de lectura pública).
+        var solicitudesPriv = [];
+        var tutoresPriv = {};
+        let idsSolicitudesConocidas = null;
+        let refSolicitudesPriv = null, refTutoresPriv = null;
+
+        function datosTutor(jugadorId) { return tutoresPriv[String(jugadorId)] || null; }
+
+        function guardarTutorPrivado(jugadorId, nombre, telefono, autoriza) {
+            return firebase.database().ref('sub15_privado/tutores/' + jugadorId).set({
+                nombre: String(nombre || '').trim().toUpperCase(),
+                telefono: String(telefono || '').replace(/\D/g, ''),
+                autoriza: !!autoriza,
+                fecha: new Date().toISOString()
+            }).catch(err => { alert('⚠️ No se pudieron guardar los datos del padre/madre/tutor (' + (err && err.message || err) + '). Revisa tu sesión y las reglas de Firebase.'); });
+        }
+        function eliminarSolicitudPrivada(id) {
+            return firebase.database().ref('sub15_privado/solicitudes/' + id).remove().catch(err => console.warn('No se pudo quitar la solicitud de la nube', err));
+        }
+        function eliminarTutorPrivado(jugadorId) {
+            return firebase.database().ref('sub15_privado/tutores/' + jugadorId).remove().catch(err => console.warn('No se pudo quitar el tutor de la nube', err));
+        }
+
+        function iniciarEscuchasPrivadas() {
+            if (refSolicitudesPriv) return;
+            refSolicitudesPriv = firebase.database().ref('sub15_privado/solicitudes');
+            refTutoresPriv = firebase.database().ref('sub15_privado/tutores');
+            refSolicitudesPriv.on('value', function (snapshot) {
+                const val = snapshot.val() || {};
+                const lista = (Array.isArray(val) ? val : Object.values(val)).filter(Boolean);
+                const nuevas = idsSolicitudesConocidas ? lista.filter(s => !idsSolicitudesConocidas.has(s.id)) : [];
+                idsSolicitudesConocidas = new Set(lista.map(s => s.id));
+                solicitudesPriv = lista;
+                db.solicitudes = lista.slice();
                 localStorage.setItem('liga_sub15_db', JSON.stringify(db));
                 renderizarSolicitudes();
-                primeraCargaSolicitudesFirebase = false;
-                return;
-            }
-            const idsLocales = new Set(db.solicitudes.map(s => s.id));
-            let huboNuevas = false;
-            remotas.forEach(rs => {
-                if (!idsLocales.has(rs.id) && !idsSolicitudesResueltasSinPublicar.has(rs.id)) {
-                    db.solicitudes.push(rs);
-                    huboNuevas = true;
+                if (nuevas.length) {
+                    renderizarResumenDia();
+                    reproducirSonidoNuevaSolicitud();
+                    mostrarAvisoAutoguardado('📥 ¡Nueva solicitud de registro recibida!');
                 }
-            });
-            if (huboNuevas) {
-                localStorage.setItem('liga_sub15_db', JSON.stringify(db));
-                renderizarSolicitudes();
-                renderizarResumenDia();
-                reproducirSonidoNuevaSolicitud();
-                mostrarAvisoAutoguardado('📥 ¡Nueva solicitud de registro recibida!');
-            }
-        });
+            }, function (err) { console.warn('No se pudieron leer las solicitudes privadas', err); });
+            refTutoresPriv.on('value', function (snapshot) {
+                tutoresPriv = snapshot.val() || {};
+            }, function (err) { console.warn('No se pudieron leer los datos de tutores', err); });
+        }
+        function detenerEscuchasPrivadas() {
+            if (refSolicitudesPriv) refSolicitudesPriv.off();
+            if (refTutoresPriv) refTutoresPriv.off();
+            refSolicitudesPriv = null; refTutoresPriv = null;
+            idsSolicitudesConocidas = null; solicitudesPriv = []; tutoresPriv = {};
+        }
 
         // --- Votos de la Encuesta Rápida: igual que las solicitudes, se escuchan en vivo
         // (sin esperar a "Publicar cambios") para que veas los resultados llegar en tiempo real. ---
@@ -2106,7 +2235,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
         // Además index.html guarda una sesión por visita en 'sesiones/AAAA-MM-DD' (quién, entrada
         // y salida): de ahí salen las visitas del día y el pico de conectados de "Resumen de hoy",
         // aunque este panel no haya estado abierto.
-        const CLAVE_AVISOS_CONECTADOS = 'ligaAvisosConectados';
+        const CLAVE_AVISOS_CONECTADOS = 'sub15_ligaAvisosConectados';
         const MAX_EDAD_CONECTADO_MS = 30 * 60 * 1000;   // entradas más viejas = fantasmas, se ignoran
         const SECCION_REGISTRO = 'Solicitud de Registro';   // igual que la etiqueta que manda index.html
         const ESPERA_AVISO_REGISTRO_MS = 10 * 60 * 1000;    // máx. 1 aviso de "llegó al formulario" por visitante cada 10 min
@@ -2709,6 +2838,66 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             });
         }
 
+        // ----- Estadísticas de patrocinadores (sub15_patro_stats/<id>/<AAAA-MM-DD>/{v,c}) -----
+        let patroStatsFilas = [], patroStatsPeriodoTxt = '';
+        async function cargarStatsPatrocinadores() {
+            const cont = document.getElementById('patro-stats-resultado');
+            const btn = document.getElementById('btn-patro-stats');
+            if (!cont) return;
+            if (btn) { btn.disabled = true; btn.textContent = 'Cargando…'; }
+            let datos = {};
+            try {
+                datos = (await firebase.database().ref('sub15_patro_stats').once('value')).val() || {};
+            } catch (e) {
+                cont.innerHTML = '<p style="color:#c62828; font-weight:bold;">Firebase no dejó leer "sub15_patro_stats". Revisa las reglas de Realtime Database.</p>';
+                if (btn) { btn.disabled = false; btn.textContent = 'Actualizar'; }
+                return;
+            }
+            if (btn) { btn.disabled = false; btn.textContent = 'Actualizar'; }
+            const dias = parseInt(document.getElementById('patro-stats-periodo').value, 10) || 0;
+            const desde = dias ? fechaMexico(Date.now() - (dias - 1) * 86400000) : '0000-00-00';
+            patroStatsPeriodoTxt = dias ? 'Últimos ' + dias + ' días (desde ' + desde + ')' : 'Todo el tiempo';
+            patroStatsFilas = (db.patrocinadores || []).map(function (p) {
+                const porDia = datos[p.id] || {};
+                let v = 0, c = 0;
+                Object.keys(porDia).forEach(function (f) {
+                    if (f < desde) return;
+                    v += (porDia[f] && porDia[f].v) || 0;
+                    c += (porDia[f] && porDia[f].c) || 0;
+                });
+                return { nombre: p.nombre, vistas: v, clics: c, ctr: v ? (c / v * 100) : 0, tieneLink: !!p.link };
+            }).sort(function (a, b) { return b.vistas - a.vistas; });
+            cont.innerHTML = patroStatsFilas.length
+                ? '<table><thead><tr><th>Patrocinador</th><th>👁️ Vistas</th><th>👆 Clics</th><th>% Clics</th></tr></thead><tbody>' +
+                  patroStatsFilas.map(function (f) {
+                      return '<tr><td><b>' + escapeHtml(f.nombre) + '</b></td><td>' + f.vistas + '</td><td>' + (f.tieneLink ? f.clics : '<span style="color:#888;">sin enlace</span>') + '</td><td>' + (f.tieneLink ? f.ctr.toFixed(1) + '%' : '—') + '</td></tr>';
+                  }).join('') + '</tbody></table><p style="font-size:0.75rem; color:#888; margin-top:6px;">' + escapeHtml(patroStatsPeriodoTxt) + '</p>'
+                : '<p style="color:#888;">Aún no hay patrocinadores registrados.</p>';
+        }
+        function descargarStatsPatrocinadoresCSV() {
+            if (!patroStatsFilas.length) return alert('Primero pulsa "Actualizar" para cargar los datos.');
+            const esc = function (t) { return '"' + String(t).replace(/"/g, '""') + '"'; };
+            const lineas = ['Patrocinador,Vistas,Clics,% Clics,Periodo'].concat(patroStatsFilas.map(function (f) {
+                return [esc(f.nombre), f.vistas, f.clics, f.ctr.toFixed(1), esc(patroStatsPeriodoTxt)].join(',');
+            }));
+            const blob = new Blob(['\ufeff' + lineas.join('\n')], { type: 'text/csv;charset=utf-8' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'patrocinadores-resultados.csv';
+            document.body.appendChild(a); a.click(); a.remove();
+            setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+        }
+        function imprimirStatsPatrocinadores() {
+            if (!patroStatsFilas.length) return alert('Primero pulsa "Actualizar" para cargar los datos.');
+            const w = window.open('', '_blank');
+            if (!w) return alert('Permite las ventanas emergentes para imprimir el reporte.');
+            const filas = patroStatsFilas.map(function (f) {
+                return '<tr><td>' + escapeHtml(f.nombre) + '</td><td>' + f.vistas + '</td><td>' + (f.tieneLink ? f.clics : '—') + '</td><td>' + (f.tieneLink ? f.ctr.toFixed(1) + '%' : '—') + '</td></tr>';
+            }).join('');
+            w.document.write('<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Resultados de patrocinadores</title><style>body{font-family:Arial,sans-serif;padding:30px;color:#111}table{border-collapse:collapse;width:100%;margin-top:16px}th,td{border:1px solid #ccc;padding:8px 10px;text-align:left}th{background:#f3f3f3}</style></head><body><h1>Resultados de patrocinadores</h1><p>' + escapeHtml(patroStatsPeriodoTxt) + ' · Generado el ' + new Date().toLocaleDateString('es-MX') + '</p><table><thead><tr><th>Patrocinador</th><th>Vistas del banner</th><th>Clics</th><th>% Clics</th></tr></thead><tbody>' + filas + '</tbody></table><script>window.onload=function(){window.print();}<\/script><\/body></html>');
+            w.document.close();
+        }
+
         // ----- Historial de visitas (últimos 30 días) -----
         // Lee sesiones/AAAA-MM-DD de cada día. "Visitas" = veces que alguien entró;
         // "Personas" = visitantes distintos. Las secciones salen del campo 'sec' que guarda index.html.
@@ -2873,7 +3062,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             });
         }
 
-        const NOMBRE_LIGA_DEFAULT = 'Liga de Futbol Acapulco';
+        const NOMBRE_LIGA_DEFAULT = 'Liga Amatillo Sub 15 Sabatina';
         function nombreLigaActual() {
             const n = (typeof db !== 'undefined' && db && db.config && db.config.nombreLiga) ? String(db.config.nombreLiga).trim() : '';
             return (!n || /cosmar/i.test(n)) ? NOMBRE_LIGA_DEFAULT : n;
@@ -2967,8 +3156,63 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             const errEl = document.getElementById('login-error-msg');
             errEl.textContent = '';
             if (!email || !password) { errEl.textContent = 'Escribe tu correo y contraseña.'; return; }
+            if (typeof firebase === 'undefined') { errEl.textContent = 'No cargó Firebase. Revisa tu internet y recarga la página (Ctrl+F5).'; return; }
+            errEl.style.color = '#555';
+            errEl.textContent = '⏳ Entrando...';
             firebase.auth().signInWithEmailAndPassword(email, password)
-                .catch(err => { errEl.textContent = 'Correo o contraseña incorrectos.'; });
+                .catch(async err => {
+                    errEl.style.color = '#c62828';
+                    const c = (err && err.code) || '';
+                    const credencialesMal = ['auth/invalid-credential', 'auth/invalid-login-credentials', 'auth/wrong-password', 'auth/user-not-found'];
+                    if (credencialesMal.indexOf(c) !== -1) {
+                        errEl.textContent = '🔎 Revisando qué dato falla...';
+                        let metodos = null;
+                        try { metodos = await firebase.auth().fetchSignInMethodsForEmail(email); } catch (e) { metodos = null; }
+                        let diag;
+                        if (c === 'auth/user-not-found') {
+                            diag = '❌ El CORREO no está registrado.';
+                        } else if (c === 'auth/wrong-password') {
+                            diag = '❌ La CONTRASEÑA es incorrecta (el correo sí existe).';
+                        } else if (metodos && metodos.indexOf('password') !== -1) {
+                            diag = '❌ La CONTRASEÑA es incorrecta. El correo sí existe en el sistema.';
+                        } else if (metodos && metodos.length) {
+                            diag = '⚠️ Ese correo existe pero entra con otro método (' + metodos.join(', ') + '), no con contraseña.';
+                        } else {
+                            diag = '❌ Firebase no confirma el correo o la contraseña (por seguridad no dice cuál de los dos). Revisa el correo letra por letra y usa "Mostrar contraseña".';
+                        }
+                        const avisos = [];
+                        avisos.push('Correo escrito: <b>' + escapeHtml(email) + '</b>');
+                        avisos.push('Contraseña: ' + password.length + ' caracteres' + (password !== password.trim() ? ' — <b>tiene un espacio al inicio o al final</b>' : ''));
+                        if (/\s/.test(email)) avisos.push('<b>El correo tiene espacios</b>');
+                        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) avisos.push('<b>El correo no parece válido</b>');
+                        errEl.innerHTML = diag + '<br><span style="color:#555;">' + avisos.join('<br>') + '</span>';
+                        return;
+                    }
+                    const mensajes = {
+                        'auth/invalid-email': 'El correo no es válido.',
+                        'auth/too-many-requests': 'Demasiados intentos fallidos. Espera unos minutos y vuelve a intentar (o usa "¿Olvidaste tu contraseña?").',
+                        'auth/user-disabled': 'Esta cuenta está deshabilitada en Firebase.',
+                        'auth/network-request-failed': 'Sin conexión con Firebase. Revisa tu internet.',
+                        'auth/operation-not-supported-in-this-environment': 'Abre la página desde su dirección https:// (no como archivo de tu computadora).',
+                        'auth/unauthorized-domain': 'Este dominio no está autorizado en Firebase (Authentication > Configuración > Dominios autorizados).',
+                        'auth/operation-not-allowed': 'El acceso con correo y contraseña está desactivado en Firebase.'
+                    };
+                    if (c.indexOf('auth/requests-from-referer') === 0 || c === 'auth/invalid-api-key') {
+                        errEl.textContent = '🌐 Firebase no permite entrar desde esta dirección (' + location.host + '). Usa la página publicada, o agrega esta dirección en Firebase > Authentication > Configuración > Dominios autorizados y en Google Cloud > Credenciales > tu clave de API > restricciones de sitios web. (' + c + ')';
+                        return;
+                    }
+                    errEl.textContent = (mensajes[c] || 'No se pudo entrar.') + (c ? ' (' + c + ')' : '');
+                });
+        }
+
+        function recuperarContrasenaAdmin() {
+            const email = document.getElementById('login-email').value.trim();
+            const errEl = document.getElementById('login-error-msg');
+            if (!email) { errEl.style.color = '#c62828'; errEl.textContent = 'Escribe primero tu correo y vuelve a presionar este enlace.'; return; }
+            if (typeof firebase === 'undefined') { errEl.style.color = '#c62828'; errEl.textContent = 'No cargó Firebase. Revisa tu internet y recarga la página.'; return; }
+            firebase.auth().sendPasswordResetEmail(email)
+                .then(() => { errEl.style.color = '#2e7d32'; errEl.textContent = '✅ Si ese correo está registrado, te enviamos un enlace para crear una contraseña nueva. Revisa también Spam.'; })
+                .catch(err => { errEl.style.color = '#c62828'; errEl.textContent = 'No se pudo enviar el enlace (' + ((err && err.code) || 'error') + ').'; });
         }
 
         function cerrarSesionAdmin() {
@@ -2980,15 +3224,19 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             if (user) {
                 pantalla.style.display = 'none';
                 iniciarEscuchaConectados();
+                iniciarEscuchasPrivadas();
+                cpEscucharEscaneos();
             } else {
                 pantalla.style.display = 'flex';
                 detenerEscuchaConectados();
+                detenerEscuchasPrivadas();
+                cpDetenerEscaneos();
             }
         });
 
         function crearConfigCredencialDefault() {
             return {
-                nombreLiga: 'LIGA DE FUTBOL ACAPULCO',
+                nombreLiga: 'LIGA AMATILLO SUB 15 SABATINA',
                 asociacion: '',
                 asociacion2: '',
                 temporada: '',
@@ -3022,6 +3270,12 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
         }
         function reg(dbRef, campo) {
             const v = dbRef.reglamento && dbRef.reglamento[campo];
+            if (campo === 'amarillasParaAcumulada' && !(Number(v) >= 1)) return REGLAMENTO_DEFAULTS[campo];   // 0 = sin definir: la lógica de tarjetas usa el valor seguro
+            return (v === undefined || v === null || v === '') ? REGLAMENTO_DEFAULTS[campo] : v;
+        }
+        // Valor tal como lo guardó el admin (permite 0), para mostrarlo/editarlo sin que lo cambie el valor seguro de arriba.
+        function regRaw(dbRef, campo) {
+            const v = dbRef.reglamento && dbRef.reglamento[campo];
             return (v === undefined || v === null || v === '') ? REGLAMENTO_DEFAULTS[campo] : v;
         }
 
@@ -3044,8 +3298,9 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             if (!obj.historialFichajes) obj.historialFichajes = [];
             if (!obj.arbitros) obj.arbitros = [];
             if (!obj.campos) obj.campos = [];
-            if (!obj.solicitudes) obj.solicitudes = [];
+            obj.solicitudes = (typeof solicitudesPriv !== 'undefined' && Array.isArray(solicitudesPriv)) ? solicitudesPriv.slice() : [];
             if (!obj.finanzas) obj.finanzas = {};
+            if (!obj.comprobantes) obj.comprobantes = {};
             if (!obj.votosMvp) obj.votosMvp = {};
             if (!obj.comunicados) obj.comunicados = [];
             if (!obj.patrocinadores) obj.patrocinadores = [];
@@ -3068,10 +3323,11 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             }
             if (!obj.encuestaVotos || typeof obj.encuestaVotos !== 'object') obj.encuestaVotos = {};
             if (obj.registrosCerrados === undefined) obj.registrosCerrados = false;
+            if (!obj.periodoAltas || typeof obj.periodoAltas !== 'object') obj.periodoAltas = { activo: false, inicio: '', fin: '' };
             if (obj.liguillaActiva === undefined) obj.liguillaActiva = false;
             if (!obj.config) obj.config = crearConfigCredencialDefault();
             if (obj.config.logoSitio === undefined) obj.config.logoSitio = '';
-            if (!obj.config.nombreLiga || /cosmar/i.test(obj.config.nombreLiga)) obj.config.nombreLiga = 'LIGA DE FUTBOL ACAPULCO';
+            if (!obj.config.nombreLiga || /cosmar/i.test(obj.config.nombreLiga)) obj.config.nombreLiga = 'LIGA AMATILLO SUB 15 SABATINA';
             (obj.equipos || []).forEach(eq => { if (!eq.pin) eq.pin = String(Math.floor(100000 + Math.random() * 900000)); });
             (obj.arbitros || []).forEach(arb => { if (!arb.pin) arb.pin = String(Math.floor(100000 + Math.random() * 900000)); });
             // Folio secuencial del N° CAM (00001, 00002...): si es la primera vez que se
@@ -3129,7 +3385,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
 
         function limpiarAvisosExpirados() {
             if (!db.comunicados) return;
-            db.comunicados = db.comunicados.filter(c => (Date.now() - momentoAviso(c)) <= DURACION_AVISO_MS);
+            db.comunicados = db.comunicados.filter(c => (c.tipo === 'sancion' && c.jugadorId) || (Date.now() - momentoAviso(c)) <= DURACION_AVISO_MS);
         }
 
         limpiarAvisosExpirados();
@@ -3241,7 +3497,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             const tarjetas = [
                 { valor: partidosHoy.length, etiqueta: 'Partidos hoy', color: '#0d2a4d', ancla: '#form-add-partido' },
                 { valor: pendientes, etiqueta: 'Solicitudes pendientes', color: pendientes > 0 ? '#c62828' : '#2e7d32', ancla: '#lista-solicitudes-pendientes' },
-                { valor: equiposConAdeudo, etiqueta: 'Equipos con adeudo', color: equiposConAdeudo > 0 ? '#b45309' : '#2e7d32', ancla: '#lista-finanzas' },
+                { valor: equiposConAdeudo, etiqueta: 'Equipos con adeudo', color: equiposConAdeudo > 0 ? '#b45309' : '#2e7d32', ancla: '#tabla-control-financiero' },
                 { valor: sinAsignar, etiqueta: 'Partidos sin árbitro/cancha', color: sinAsignar > 0 ? '#c62828' : '#2e7d32', ancla: '#form-add-partido' }
             ];
 
@@ -3289,7 +3545,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
                 const url = URL.createObjectURL(blob);
                 const enlace = document.createElement('a');
                 enlace.href = url;
-                enlace.download = automatico ? `liga_futbol_autoguardado_${fecha}_${hora}.json` : `liga_futbol_backup_${fecha}.json`;
+                enlace.download = automatico ? `liga_juvenil_autoguardado_${fecha}_${hora}.json` : `liga_juvenil_backup_${fecha}.json`;
                 document.body.appendChild(enlace);
                 enlace.click();
                 document.body.removeChild(enlace);
@@ -3440,6 +3696,9 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             try {
                 const texto = JSON.stringify(db);
                 datos = JSON.parse(texto);
+                delete datos.solicitudes;   // privado: vive en sub15_privado/solicitudes
+                delete datos.comprobantes;  // privado: vive en sub15_comprobantes (solo admin y árbitro)
+                (datos.jugadores || []).forEach(j => { delete j.tutorNombre; delete j.tutorTelefono; delete j.tutorAutoriza; });
                 pesoMB = texto.length / (1024 * 1024);
             } catch (err) {
                 mostrarFirebaseStatus('❌ No se pudo preparar la información para publicar. (' + err.message + ')', true);
@@ -3457,7 +3716,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
 
             let promesa;
             try {
-                promesa = firebaseDbRef.set(datos);
+                promesa = firebaseDbRef.set(datos).then(() => cpPublicarPrivados());
             } catch (err) {
                 terminado = true; clearTimeout(aviso);
                 mostrarFirebaseStatus('❌ No se pudo publicar: ' + err.message, true);
@@ -3495,7 +3754,9 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
                 }
                 db = datosNube;
                 normalizarDB(db);
+                db.comprobantes = {};      // los comprobantes ya no vienen en la base pública: se traen del nodo privado
                 localStorage.setItem('liga_sub15_db', JSON.stringify(db));
+                cpTraerPrivados();
                 cargarConfigFormulario();
                 aplicarLogoSitio();
                 hayCambiosSinPublicar = false;
@@ -3524,8 +3785,10 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
         firebaseDbRef.once('value').then(snapshot => {
             const datosNube = snapshot.val();
             if (datosNube) {
+                const cpLocal = (db && db.comprobantes && typeof db.comprobantes === 'object') ? db.comprobantes : {};
                 db = datosNube;
                 normalizarDB(db);
+                db.comprobantes = cpLocal;   // los comprobantes ya no vienen en la base pública: se conservan los locales y el nodo privado los completa
                 localStorage.setItem('liga_sub15_db', JSON.stringify(db));
                 cargarConfigFormulario();
                 aplicarLogoSitio();
@@ -3943,7 +4206,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             document.getElementById('ficha-adm-numero').innerText = j.numero ? `#${j.numero}` : '—';
             document.getElementById('ficha-adm-posicion').innerText = j.posicion || '—';
             document.getElementById('ficha-adm-categoria').innerText = j.categoria || '—';
-            { const _t = document.getElementById('ficha-adm-tutor'); if (_t) _t.innerText = j.tutorNombre ? j.tutorNombre + (j.tutorTelefono ? ' · Tel. ' + j.tutorTelefono : '') : '—'; }
+            { const _t = document.getElementById('ficha-adm-tutor'); const _d = datosTutor(j.id); if (_t) _t.innerText = (_d && _d.nombre) ? _d.nombre + (_d.telefono ? ' · Tel. ' + _d.telefono : '') : '—'; }
             const edad = calcularEdad(j.fechaNacimiento);
             document.getElementById('ficha-adm-edad').innerText = edad !== null ? `${edad} años` : '—';
             document.getElementById('ficha-adm-nacionalidad').innerText = j.nacionalidad || '—';
@@ -4135,7 +4398,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             document.getElementById('reg-cuota-arbitraje').value = reg(db, 'cuotaArbitraje');
             document.getElementById('reg-cuota-inscripcion-equipo').value = reg(db, 'cuotaInscripcionEquipo');
             document.getElementById('reg-cuota-inscripcion-jugador').value = reg(db, 'cuotaInscripcionJugador');
-            document.getElementById('reg-amarillas-para-acumulada').value = reg(db, 'amarillasParaAcumulada');
+            document.getElementById('reg-amarillas-para-acumulada').value = regRaw(db, 'amarillasParaAcumulada');
             document.getElementById('reg-partidos-acumuladas').value = reg(db, 'partidosAmarillasAcumuladas');
             document.getElementById('reg-multa-acumuladas').value = reg(db, 'multaAmarillasAcumuladas');
             document.getElementById('reg-partidos-doble-amarilla').value = reg(db, 'partidosDobleAmarilla');
@@ -4158,19 +4421,21 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
         }
 
         // Lee el formulario del Reglamento, lo guarda en db.reglamento y publica los cambios.
+        // Número del formulario: vacío = valor por defecto; 0 se respeta (significa "sin definir").
+        function regNumForm(id, def) { const el = document.getElementById(id); const p = el ? parseInt(el.value) : NaN; return isNaN(p) ? def : Math.max(0, p); }
         function guardarReglamento() {
             db.reglamento = {
-                duracionMinutos: parseInt(document.getElementById('reg-duracion-minutos').value) || REGLAMENTO_DEFAULTS.duracionMinutos,
-                numTiempos: parseInt(document.getElementById('reg-num-tiempos').value) || REGLAMENTO_DEFAULTS.numTiempos,
+                duracionMinutos: regNumForm('reg-duracion-minutos', REGLAMENTO_DEFAULTS.duracionMinutos),
+                numTiempos: regNumForm('reg-num-tiempos', REGLAMENTO_DEFAULTS.numTiempos),
                 toleranciaMinutos: parseInt(document.getElementById('reg-tolerancia').value) || 0,
-                jugadoresTitulares: parseInt(document.getElementById('reg-titulares').value) || REGLAMENTO_DEFAULTS.jugadoresTitulares,
+                jugadoresTitulares: regNumForm('reg-titulares', REGLAMENTO_DEFAULTS.jugadoresTitulares),
                 jugadoresSuplentes: parseInt(document.getElementById('reg-suplentes').value) || 0,
                 categoriaTexto: document.getElementById('reg-categoria').value.trim(),
                 balonOficial: document.getElementById('reg-balon').value.trim(),
                 cuotaArbitraje: parseInt(document.getElementById('reg-cuota-arbitraje').value) || 0,
                 cuotaInscripcionEquipo: parseInt(document.getElementById('reg-cuota-inscripcion-equipo').value) || 0,
                 cuotaInscripcionJugador: parseInt(document.getElementById('reg-cuota-inscripcion-jugador').value) || 0,
-                amarillasParaAcumulada: parseInt(document.getElementById('reg-amarillas-para-acumulada').value) || REGLAMENTO_DEFAULTS.amarillasParaAcumulada,
+                amarillasParaAcumulada: regNumForm('reg-amarillas-para-acumulada', REGLAMENTO_DEFAULTS.amarillasParaAcumulada),
                 partidosAmarillasAcumuladas: parseInt(document.getElementById('reg-partidos-acumuladas').value) || 0,
                 multaAmarillasAcumuladas: parseInt(document.getElementById('reg-multa-acumuladas').value) || 0,
                 partidosDobleAmarilla: parseInt(document.getElementById('reg-partidos-doble-amarilla').value) || 0,
@@ -4178,7 +4443,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
                 partidosRojaDirecta: parseInt(document.getElementById('reg-partidos-roja').value) || 0,
                 multaRojaDirecta: parseInt(document.getElementById('reg-multa-roja').value) || 0,
                 notasAdicionales: document.getElementById('reg-notas').value.trim(),
-                jornadasRegulares: Math.min(60, Math.max(1, parseInt((document.getElementById('reg-jornadas-regulares') || {}).value) || REGLAMENTO_DEFAULTS.jornadasRegulares))
+                jornadasRegulares: Math.min(60, regNumForm('reg-jornadas-regulares', REGLAMENTO_DEFAULTS.jornadasRegulares))
             };
             poblarJornadasRegulares('admin-part-jornada');
             actualizarCalculoJornadas();
@@ -4206,6 +4471,40 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             alert('✅ Escudo quitado. Ya puedes subir uno nuevo cuando quieras.');
         }
 
+        // ----- Periodo de altas y bajas -----
+        // Devuelve { abierto, mensaje }. Si el periodo no está activado, siempre está abierto.
+        function estadoPeriodoAltas() {
+            const per = db.periodoAltas || {};
+            if (!per.activo || (!per.inicio && !per.fin)) return { abierto: true, mensaje: 'Sin periodo configurado: siempre abierto.' };
+            const hoy = fechaMexico(Date.now());
+            if (per.inicio && hoy < per.inicio) return { abierto: false, mensaje: '🔴 Cerrado: el periodo abre el ' + per.inicio + '.' };
+            if (per.fin && hoy > per.fin) return { abierto: false, mensaje: '🔴 Cerrado: el periodo terminó el ' + per.fin + '.' };
+            return { abierto: true, mensaje: '🟢 Periodo abierto' + (per.fin ? ' hasta el ' + per.fin : '') + '.' };
+        }
+        function guardarPeriodoAltas() {
+            const inicio = document.getElementById('periodo-altas-inicio').value;
+            const fin = document.getElementById('periodo-altas-fin').value;
+            const activo = document.getElementById('periodo-altas-activo').checked;
+            if (inicio && fin && fin < inicio) { alert('La fecha de cierre no puede ser anterior a la de apertura.'); document.getElementById('periodo-altas-fin').value = (db.periodoAltas || {}).fin || ''; return; }
+            if (activo && !inicio && !fin) { alert('Elige al menos una fecha (apertura o cierre) para activar el periodo.'); document.getElementById('periodo-altas-activo').checked = false; return; }
+            db.periodoAltas = { activo: activo, inicio: inicio, fin: fin };
+            guardarDB();
+            pintarPeriodoAltas();
+        }
+        function pintarPeriodoAltas() {
+            const per = db.periodoAltas || {};
+            const set = (id, v) => { const el = document.getElementById(id); if (el) el[typeof v === 'boolean' ? 'checked' : 'value'] = v; };
+            set('periodo-altas-activo', !!per.activo); set('periodo-altas-inicio', per.inicio || ''); set('periodo-altas-fin', per.fin || '');
+            const est = document.getElementById('periodo-altas-estado');
+            if (est) { const e = estadoPeriodoAltas(); est.textContent = e.mensaje; est.style.color = e.abierto ? '#2e7d32' : '#c62828'; }
+        }
+        // Fuera del periodo el admin puede continuar, pero tiene que confirmarlo.
+        async function permitirFueraDePeriodo(accion) {
+            const e = estadoPeriodoAltas();
+            if (e.abierto) return true;
+            return await confirmarAccion(`Estás fuera del periodo de altas y bajas. ${e.mensaje.replace(/^🔴 /, '')}<br>¿Quieres ${accion} de todos modos?`, { textoConfirmar: 'Continuar' });
+        }
+
         function alternarRegistros(valor) {
             db.registrosCerrados = valor;
             guardarDB();
@@ -4214,6 +4513,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
 
         function verificarEstadoFormularios() {
             document.getElementById('check-cierre-registros').checked = db.registrosCerrados || false;
+            pintarPeriodoAltas();
             const btnJugador = document.querySelector('#form-add-jugador button');
             const inputsJugador = document.querySelectorAll('#form-add-jugador input, #form-add-jugador select');
 
@@ -4231,19 +4531,25 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
                 e.preventDefault();
                 const idEditando = document.getElementById('editcom-id').value;
                 const fotoB64 = await convertirImagenABase64(document.getElementById('com-foto'));
+                const soloImagen = document.getElementById('com-solo-imagen').checked;
+                if (soloImagen) {
+                    const previa = idEditando ? (db.comunicados || []).find(x => x.id === parseInt(idEditando)) : null;
+                    if (!fotoB64 && !(previa && previa.imagen)) { alert('Selecciona la imagen que quieres publicar.'); return; }
+                }
                 if (idEditando) {
                     const c = (db.comunicados || []).find(x => x.id === parseInt(idEditando));
                     if (!c) { cancelarEdicionComunicado(); return; }
-                    c.titulo = document.getElementById('com-titulo').value.trim();
-                    c.tipo = document.getElementById('com-tipo').value;
-                    c.contenido = document.getElementById('com-contenido').value.trim();
+                    c.soloImagen = soloImagen;
+                    c.titulo = soloImagen ? '' : document.getElementById('com-titulo').value.trim();
+                    c.tipo = soloImagen ? 'aviso' : document.getElementById('com-tipo').value;
+                    c.contenido = soloImagen ? '' : document.getElementById('com-contenido').value.trim();
                     if (fotoB64) c.imagen = fotoB64;
                     cancelarEdicionComunicado();
                     guardarDB();
                     alert("Aviso actualizado.");
                 } else {
-                    db.comunicados.unshift({ id: Date.now(), titulo: document.getElementById('com-titulo').value.trim(), tipo: document.getElementById('com-tipo').value, contenido: document.getElementById('com-contenido').value.trim(), imagen: fotoB64, fecha: new Date().toLocaleDateString('es-MX'), ts: Date.now() });
-                    this.reset(); guardarDB(); alert("Anuncio publicado. Se quitará solo en 24 horas.");
+                    db.comunicados.unshift({ id: Date.now(), soloImagen: soloImagen, titulo: soloImagen ? '' : document.getElementById('com-titulo').value.trim(), tipo: soloImagen ? 'aviso' : document.getElementById('com-tipo').value, contenido: soloImagen ? '' : document.getElementById('com-contenido').value.trim(), imagen: fotoB64, fecha: new Date().toLocaleDateString('es-MX'), ts: Date.now() });
+                    this.reset(); alternarSoloImagenComunicado(); guardarDB(); alert("Anuncio publicado. Se quitará solo en 24 horas.");
                 }
             });
 
@@ -4312,6 +4618,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             document.getElementById('form-add-jugador').addEventListener('submit', async function (e) {
                 e.preventDefault();
                 if (db.registrosCerrados) return alert("Los registros están bloqueados administrativamente.");
+                if (!(await permitirFueraDePeriodo('dar de alta al jugador'))) return;
                 const equipoIdSel = parseInt(document.getElementById('admin-jug-equipo').value);
                 const numeroSel = document.getElementById('admin-jug-numero').value.trim();
                 if (!numeroSel) return alert("El número de playera es obligatorio.");
@@ -4339,6 +4646,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
                 const jugadorBase64 = await convertirImagenABase64(document.getElementById('admin-jug-foto'));
                 db.contadorFolioJugadores = (db.contadorFolioJugadores || 0) + 1;
                 const nuevoJugadorId = Date.now();
+                guardarTutorPrivado(nuevoJugadorId, document.getElementById('admin-jug-tutor-nombre').value, document.getElementById('admin-jug-tutor-tel').value, true);
                 db.jugadores.push({
                     id: nuevoJugadorId,
                     nombre: nombreSel,
@@ -4348,14 +4656,11 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
                     categoria: document.getElementById('admin-jug-categoria').value,
                     lugarNacimiento: document.getElementById('admin-jug-lugar-nac').value.trim().toUpperCase(),
                     fechaNacimiento: document.getElementById('admin-jug-fecha-nac').value,
-                    tutorNombre: document.getElementById('admin-jug-tutor-nombre').value.trim().toUpperCase(),
-                    tutorTelefono: document.getElementById('admin-jug-tutor-tel').value.replace(/\D/g, ''),
-                    tutorAutoriza: true,
                     nacionalidad: document.getElementById('admin-jug-nacionalidad').value.trim().toUpperCase() || 'MEXICANA',
                     foto: jugadorBase64, goles: 0, amarillas: 0, rojas: 0, xiIdeal: [], folioNum: db.contadorFolioJugadores, fechaAlta: fechaMexico(Date.now())
                 });
                 const nombreEquipoNuevoJug = db.equipos.find(e => e.id === equipoIdSel)?.nombre || 'Agente Libre';
-                agregarAvisoRegistro('registro', '🆕 Nuevo jugador registrado', `${nombreSel} se une al equipo ${nombreEquipoNuevoJug}.`, { jugadorId: nuevoJugadorId, imagen: jugadorBase64 || '' });
+                agregarAvisoRegistro('registro', '🆕 Nuevo jugador registrado', `${escapeHtml(nombreSel)} se une al equipo ${escapeHtml(nombreEquipoNuevoJug)}.`, { jugadorId: nuevoJugadorId, imagen: jugadorBase64 || '' });
                 this.reset();
                 document.getElementById('admin-jug-foto-preview').style.display = 'none';
                 guardarDB(); alert("Jugador registrado.");
@@ -4545,8 +4850,9 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
                 }
             });
 
-            document.getElementById('form-fichaje-rapido').addEventListener('submit', function (e) {
+            document.getElementById('form-fichaje-rapido').addEventListener('submit', async function (e) {
                 e.preventDefault();
+                if (!(await permitirFueraDePeriodo('ejecutar el traspaso'))) return;
                 const jId = parseInt(document.getElementById('fichaje-jugador').value);
                 const destino = document.getElementById('fichaje-destino').value;
                 const jugador = db.jugadores.find(j => j.id === jId);
@@ -4598,7 +4904,8 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
                 return;
             }
 
-            cont.innerHTML = db.solicitudes.map(s => {
+            cont.innerHTML = db.solicitudes.map(sRaw => {
+                const s = sanitizarSolicitudParaVista(sRaw);
                 const duplicado = nombreYaRegistrado(s.nombre);
                 const equipo = db.equipos.find(e => e.id === s.equipoId)?.nombre || 'Agente Libre';
                 const edad = calcularEdad(s.fechaNacimiento);
@@ -4630,6 +4937,28 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
                     </div>
                 </div>
             `; }).join('');
+        }
+
+        const POSICIONES_VALIDAS = ['Portero', 'Defensa central', 'Defensa derecho', 'Defensa izquierdo', 'Medio central', 'Medio derecho', 'Medio izquierdo', 'Delantero'];
+        const RX_FOTO_SEGURA = /^data:image\/(png|jpe?g|webp|gif);base64,[A-Za-z0-9+\/=]+$/i;
+        // Quita caracteres que permitirían inyectar HTML; se usa al aprobar una solicitud pública.
+        function limpiarTextoSolicitud(t) {
+            return String(t === undefined || t === null ? '' : t).replace(/[<>"'`]/g, '').replace(/\s+/g, ' ').trim();
+        }
+        function fotoSolicitudSegura(f) { return RX_FOTO_SEGURA.test(String(f || '')) ? f : ''; }
+        // Copia de la solicitud con todo escapado, solo para dibujarla con innerHTML.
+        function sanitizarSolicitudParaVista(s) {
+            return Object.assign({}, s, {
+                id: Number(s.id) || 0,
+                nombre: escapeHtml(s.nombre),
+                posicion: escapeHtml(s.posicion),
+                numero: escapeHtml(s.numero),
+                categoria: escapeHtml(s.categoria),
+                nacionalidad: escapeHtml(s.nacionalidad),
+                lugarNacimiento: escapeHtml(s.lugarNacimiento),
+                fechaNacimiento: escapeHtml(s.fechaNacimiento),
+                foto: fotoSolicitudSegura(s.foto)
+            });
         }
 
         function marcarSolicitudResueltaSinPublicar(id) {
@@ -4692,14 +5021,16 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
         async function aprobarSolicitud(id) {
             const sol = db.solicitudes.find(s => s.id === id);
             if (!sol) return;
+            if (!(await permitirFueraDePeriodo('aprobar esta solicitud'))) return;
             if ((db.jugadores || []).filter(j => j.equipoId === sol.equipoId).length >= 15) {
                 return alert("Ese equipo ya tiene 15 jugadores registrados (máximo por plantel). Rechaza la solicitud o reasigna al jugador a otro equipo antes de aprobarla.");
             }
-            const nombreSol = (sol.nombre || '').trim().toUpperCase();
+            const nombreSol = limpiarTextoSolicitud(sol.nombre).toUpperCase();
             const edadSolAdm = calcularEdad(sol.fechaNacimiento);
             if (edadSolAdm === null || edadSolAdm < EDAD_MIN_SUB || edadSolAdm > EDAD_MAX_SUB) {
                 if (!(await confirmarAccion(`⚠️ La edad de ${nombreSol} (${edadSolAdm === null ? 'sin fecha de nacimiento' : edadSolAdm + ' años'}) está fuera del rango Sub 15 (${EDAD_MIN_SUB} a ${EDAD_MAX_SUB} años).\n\n¿Deseas aprobarlo de todos modos?`))) return;
             }
+            const fotoSolSegura = fotoSolicitudSegura(sol.foto);
             const duplicado = nombreYaRegistrado(nombreSol);
             if (duplicado) {
                 const equipoDup = db.equipos.find(e => e.id === duplicado.equipoId)?.nombre || 'Agente Libre';
@@ -4709,17 +5040,18 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             }
             db.contadorFolioJugadores = (db.contadorFolioJugadores || 0) + 1;
             const nuevoJugadorIdSol = Date.now();
+            if (sol.tutorNombre || sol.tutorTelefono) guardarTutorPrivado(nuevoJugadorIdSol, sol.tutorNombre, sol.tutorTelefono, sol.tutorAutoriza);
             db.jugadores.push({
-                id: nuevoJugadorIdSol, nombre: nombreSol, equipoId: sol.equipoId, posicion: sol.posicion,
-                numero: sol.numero || '', categoria: sol.categoria || 'Sub 15',
-                tutorNombre: sol.tutorNombre || '', tutorTelefono: sol.tutorTelefono || '', tutorAutoriza: !!sol.tutorAutoriza,
-                lugarNacimiento: (sol.lugarNacimiento || '').toUpperCase(), fechaNacimiento: sol.fechaNacimiento || '',
-                nacionalidad: (sol.nacionalidad || 'MEXICANA').toUpperCase(),
-                foto: sol.foto, goles: 0, amarillas: 0, rojas: 0, xiIdeal: [], folioNum: db.contadorFolioJugadores, fechaAlta: fechaMexico(Date.now())
+                id: nuevoJugadorIdSol, nombre: nombreSol, equipoId: Number(sol.equipoId), posicion: POSICIONES_VALIDAS.includes(sol.posicion) ? sol.posicion : 'Jugador',
+                numero: String(sol.numero || '').replace(/\D/g, '').slice(0, 2), categoria: limpiarTextoSolicitud(sol.categoria) || 'Sub 15',
+                lugarNacimiento: limpiarTextoSolicitud(sol.lugarNacimiento).toUpperCase(), fechaNacimiento: /^\d{4}-\d{2}-\d{2}$/.test(sol.fechaNacimiento || '') ? sol.fechaNacimiento : '',
+                nacionalidad: limpiarTextoSolicitud(sol.nacionalidad || 'MEXICANA').toUpperCase() || 'MEXICANA',
+                foto: fotoSolSegura, goles: 0, amarillas: 0, rojas: 0, xiIdeal: [], folioNum: db.contadorFolioJugadores, fechaAlta: fechaMexico(Date.now())
             });
             const nombreEquipoSol = db.equipos.find(e => e.id === sol.equipoId)?.nombre || 'Agente Libre';
-            agregarAvisoRegistro('registro', '🆕 Nuevo jugador registrado', `${nombreSol} se une al equipo ${nombreEquipoSol}.`, { jugadorId: nuevoJugadorIdSol, imagen: sol.foto || '' });
+            agregarAvisoRegistro('registro', '🆕 Nuevo jugador registrado', `${escapeHtml(nombreSol)} se une al equipo ${escapeHtml(nombreEquipoSol)}.`, { jugadorId: nuevoJugadorIdSol, imagen: fotoSolSegura });
             db.solicitudes = db.solicitudes.filter(s => s.id !== id);
+            eliminarSolicitudPrivada(id);
             marcarSolicitudResueltaSinPublicar(id);
             cerrarDetalleSolicitud();
             guardarDB(); alert(`Jugador ${nombreSol} aprobado e integrado al plantel. Recuerda presionar "📤 Publicar cambios" para que quede oficial.`);
@@ -4727,6 +5059,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
 
         function rechazarSolicitud(id) {
             db.solicitudes = db.solicitudes.filter(s => s.id !== id);
+            eliminarSolicitudPrivada(id);
             marcarSolicitudResueltaSinPublicar(id);
             cerrarDetalleSolicitud();
             guardarDB();
@@ -4767,6 +5100,325 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
                     </tr>
                 `;
             }).join('') || '<tr><td colspan="4" style="color:gray; padding:12px;">No hay equipos registrados.</td></tr>';
+            try { renderizarComprobantes(); } catch (err) { console.warn('comprobantes', err); }
+        }
+
+        // ===== COMPROBANTES DE PAGO DE ARBITRAJE (con QR) =====
+        // El administrador genera un comprobante por equipo y partido. El árbitro lo escanea en la cédula
+        // y el sistema marca "Sí pagó" para ese equipo. Cada comprobante se usa una sola vez.
+        function cpFechaTexto(iso) {
+            try { return new Date(iso).toLocaleString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }); }
+            catch (e) { return String(iso || ''); }
+        }
+        function cpNuevoFolio() {
+            const nums = Object.keys(db.comprobantes || {}).map(k => parseInt(String(k).replace(/\D/g, '')) || 0);
+            nums.push(parseInt(db.cpUltimoFolio) || 0);   // el contador no baja aunque elimines comprobantes
+            return 'PA-' + String(Math.max.apply(null, nums) + 1).padStart(5, '0');
+        }
+        function cpNuevoCodigo() {
+            const abc = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            const bytes = new Uint8Array(6);
+            (window.crypto || window.msCrypto).getRandomValues(bytes);
+            return Array.from(bytes).map(b => abc[b % abc.length]).join('');
+        }
+        function cpPayloadQR(c) { return 'LFA-PAGO|' + c.folio + '|' + c.codigo; }
+        function cpNombreEquipo(id) { const e = db.equipos.find(x => x.id === id); return e ? e.nombre : 'Equipo'; }
+
+        function cpActualizarEquipos(prevE) {
+            const selP = document.getElementById('cp-partido');
+            const selE = document.getElementById('cp-equipo');
+            if (!selP || !selE) return;
+            const p = db.partidos.find(x => String(x.id) === selP.value);
+            if (!p) { selE.innerHTML = '<option value="">-- Primero elige el partido --</option>'; return; }
+            const prev = (typeof prevE === 'string') ? prevE : selE.value;
+            const ids = [p.localId, p.visitaId];
+            selE.innerHTML = ids.map(id => `<option value="${id}">${escapeHtml(cpNombreEquipo(id))}</option>`).join('');
+            if (ids.some(id => String(id) === prev)) selE.value = prev;
+        }
+
+        function renderizarComprobantes() {
+            const selP = document.getElementById('cp-partido');
+            const tbody = document.getElementById('tabla-comprobantes');
+            if (!selP || !tbody) return;
+            const prevP = selP.value;
+            const prevE = document.getElementById('cp-equipo').value;
+            const pendientes = db.partidos
+                .filter(p => !p.jugado && !p.oculto && p.localId && p.visitaId)
+                .sort((a, b) => ((a.jornada || 0) - (b.jornada || 0)) || (a.id - b.id));
+            selP.innerHTML = '<option value="">-- Elige el partido --</option>' + pendientes.map(p =>
+                `<option value="${p.id}">J${escapeHtml(String(p.jornada ?? '-'))} · ${escapeHtml(cpNombreEquipo(p.localId))} vs ${escapeHtml(cpNombreEquipo(p.visitaId))}${p.fecha ? ' · ' + escapeHtml(p.fecha) : ''}</option>`).join('');
+            if (pendientes.some(p => String(p.id) === prevP)) selP.value = prevP;
+            cpActualizarEquipos(prevE);
+
+            const montoEl = document.getElementById('cp-monto');
+            if (montoEl && !montoEl.dataset.tocado) montoEl.value = reg(db, 'cuotaArbitraje');
+            const recEl = document.getElementById('cp-recibio');
+            if (recEl && !recEl.value) { try { recEl.value = localStorage.getItem('liga_sub15_cp_recibio') || ''; } catch (e) { } }
+
+            const lista = Object.values(db.comprobantes || {}).sort((a, b) => String(b.creadoEn).localeCompare(String(a.creadoEn)));
+            tbody.innerHTML = lista.map(c => {
+                let estado;
+                if (c.estado === 'usado') {
+                    estado = `<span class="badge-status badge-ok">✅ Ya lo escaneó el árbitro</span><div style="font-size:0.65rem; color:#888; margin-top:2px;">${escapeHtml(cpFechaTexto(c.usadoEn))}${c.usadoPor ? ' · ' + escapeHtml(c.usadoPor) : ''}</div>`;
+                } else if (c.estado === 'anulado') {
+                    estado = `<span class="badge-status badge-pending">⛔ Anulado</span>`;
+                } else {
+                    estado = `<span class="badge-status badge-pending">🕓 Aún no lo escanean</span>`;
+                    if (cpNube && cpNube.indexOf(c.folio) === -1) estado += `<div style="font-size:0.68rem; color:#b45309; font-weight:bold; margin-top:3px;">📤 Falta publicar para que el árbitro lo reconozca</div>`;
+                }
+                const f = escapeHtml(c.folio);
+                return `<tr style="border-bottom:1px solid #eee;">
+                    <td style="padding:8px; font-weight:bold; font-family:monospace;">${f}</td>
+                    <td>${escapeHtml(c.equipoNombre)}</td>
+                    <td style="font-size:0.78rem;">J${escapeHtml(String(c.jornada ?? '-'))} · ${escapeHtml(c.partidoTexto)}</td>
+                    <td>$${escapeHtml(Number(c.monto || 0).toLocaleString('es-MX'))}</td>
+                    <td>${estado}</td>
+                    <td style="white-space:nowrap;">
+                        <button type="button" onclick="cpVer('${f}')" style="padding:5px 8px; font-size:0.7rem;">👁️ Ver / Imprimir</button>
+                        ${c.estado === 'vigente' ? `<button type="button" onclick="cpAnular('${f}')" style="padding:5px 8px; font-size:0.7rem; background:#b45309;">Anular</button>` : ''}
+                        <button type="button" onclick="cpEliminar('${f}')" style="padding:5px 8px; font-size:0.7rem; background:#b91c1c;">🗑️ Eliminar</button>
+                    </td>
+                </tr>`;
+            }).join('') || '<tr><td colspan="6" style="color:gray; padding:12px;">Aún no has generado comprobantes.</td></tr>';
+        }
+
+        async function generarComprobante() {
+            const pId = parseInt(document.getElementById('cp-partido').value);
+            const eqId = parseInt(document.getElementById('cp-equipo').value);
+            const p = db.partidos.find(x => x.id === pId);
+            if (!p || !eqId) { mostrarAlerta('Elige primero el partido y el equipo que paga.', { icono: '⚠️' }); return; }
+            const monto = parseFloat(document.getElementById('cp-monto').value);
+            if (!(monto > 0)) { mostrarAlerta('Escribe el monto pagado (mayor a $0).', { icono: '⚠️' }); return; }
+            if (!db.comprobantes) db.comprobantes = {};
+            const previo = Object.values(db.comprobantes).find(c => c.partidoId === pId && c.equipoId === eqId && c.estado !== 'anulado');
+            if (previo) {
+                mostrarAlerta(`${escapeHtml(cpNombreEquipo(eqId))} ya tiene el comprobante ${escapeHtml(previo.folio)} para este partido (${previo.estado === 'usado' ? 'ya escaneado' : 'sin escanear'}). Si necesitas otro, primero anula ese.`, { icono: '⚠️' });
+                return;
+            }
+            const recibio = (document.getElementById('cp-recibio').value || '').trim() || 'ADMINISTRACIÓN LIGA';
+            try { localStorage.setItem('liga_sub15_cp_recibio', recibio); } catch (e) { }
+            const folio = cpNuevoFolio();
+            db.comprobantes[folio] = {
+                folio: folio,
+                codigo: cpNuevoCodigo(),
+                partidoId: pId,
+                equipoId: eqId,
+                equipoNombre: cpNombreEquipo(eqId),
+                partidoTexto: `${cpNombreEquipo(p.localId)} vs ${cpNombreEquipo(p.visitaId)}`,
+                jornada: p.jornada ?? '',
+                fecha: p.fecha ? (p.fecha + (p.hora ? ' · ' + p.hora : '')) : '',
+                campo: p.estadio || '',
+                arbitro: p.arbitro || '',
+                monto: monto,
+                recibio: recibio,
+                creadoEn: new Date().toISOString(),
+                estado: 'vigente',
+                usadoEn: '',
+                usadoPor: ''
+            };
+            db.cpUltimoFolio = parseInt(folio.replace(/\D/g, '')) || 0;
+            guardarDB();
+            cpVer(folio);
+        }
+
+        function cpHtmlTicket(c) {
+            const liga = (db.config && db.config.nombreLiga) || 'LIGA AMATILLO SUB 15 SABATINA';
+            const anulado = c.estado === 'anulado';
+            const fila = (k, v) => `<div class="cp-fila"><span>${k}</span><b>${escapeHtml(String(v === undefined || v === null || v === '' ? '-' : v))}</b></div>`;
+            return `<div class="cp-ticket" id="cp-ticket">
+                <div class="cp-head"><b>${escapeHtml(liga)}</b><span>Comprobante de pago de arbitraje</span></div>
+                <div class="cp-sello ${anulado ? 'anulado' : ''}">${anulado ? '⛔ ANULADO' : '✔ PAGADO'}</div>
+                <div class="cp-monto"><small>Monto</small>$${escapeHtml(Number(c.monto || 0).toLocaleString('es-MX'))}</div>
+                <div class="cp-datos">
+                    ${fila('Equipo', c.equipoNombre)}
+                    ${fila('Partido', c.partidoTexto)}
+                    ${fila('Jornada', c.jornada)}
+                    ${fila('Fecha', c.fecha)}
+                    ${fila('Cancha', c.campo)}
+                    ${fila('Árbitro', c.arbitro || 'Por asignar')}
+                    ${fila('Pagó el', cpFechaTexto(c.creadoEn))}
+                    ${fila('Recibió', c.recibio)}
+                </div>
+                <div class="cp-corte"></div>
+                <div class="cp-qr">
+                    <div id="cp-qr-box"></div>
+                    <div class="cp-folio">FOLIO ${escapeHtml(c.folio)} · ${escapeHtml(c.codigo)}</div>
+                    <p>El árbitro escanea este código para confirmar el pago</p>
+                </div>
+            </div>`;
+        }
+
+        function cpVer(folio) {
+            const c = (db.comprobantes || {})[folio];
+            if (!c) return;
+            document.getElementById('cp-modal-ticket').innerHTML = cpHtmlTicket(c);
+            const box = document.getElementById('cp-qr-box');
+            if (window.QRCode) {
+                new QRCode(box, { text: cpPayloadQR(c), width: 170, height: 170, correctLevel: QRCode.CorrectLevel.M });
+            } else {
+                box.textContent = '(No se pudo cargar el generador de QR: revisa tu conexión a internet)';
+            }
+            document.getElementById('modal-comprobante').style.display = 'flex';
+        }
+
+        function cpCerrar() { document.getElementById('modal-comprobante').style.display = 'none'; }
+
+        function cpImprimir() {
+            document.body.classList.add('imp-comp');
+            const quitar = () => { document.body.classList.remove('imp-comp'); window.removeEventListener('afterprint', quitar); };
+            window.addEventListener('afterprint', quitar);
+            window.print();
+        }
+
+        async function cpDescargarPDF(btn) {
+            const ticket = document.getElementById('cp-ticket');
+            if (!ticket) return;
+            if (!window.jspdf || !window.html2canvas) { mostrarAlerta('No se pudo cargar el generador de PDF. Revisa tu conexión a internet.', { icono: '❌' }); return; }
+            const txt = btn.textContent;
+            btn.disabled = true; btn.textContent = '⏳ Generando...';
+            try {
+                const canvas = await html2canvas(ticket, { scale: 3, backgroundColor: '#ffffff', useCORS: true });
+                const anchoMm = 90, altoMm = anchoMm * canvas.height / canvas.width;
+                const doc = new window.jspdf.jsPDF({ unit: 'mm', format: [anchoMm + 10, altoMm + 10] });
+                doc.addImage(canvas.toDataURL('image/png'), 'PNG', 5, 5, anchoMm, altoMm);
+                const folio = (document.querySelector('#cp-ticket .cp-folio') || {}).textContent || 'comprobante';
+                const eq = ((document.querySelector('#cp-ticket .cp-fila b') || {}).textContent || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^\w]+/g, '_');
+                doc.save('Comprobante_' + folio.replace(/^FOLIO\s+/, '').split(' ')[0] + '_' + eq + '.pdf');
+            } catch (e) {
+                mostrarAlerta('No se pudo generar el PDF: ' + escapeHtml(e.message), { icono: '❌' });
+            }
+            btn.disabled = false; btn.textContent = txt;
+        }
+
+        // --- Eliminar y seguimiento en vivo de comprobantes ---
+        let cpNube = null;          // folios que ya existen en la nube (null = aún no se sabe)
+        let cpEscuchando = false;
+
+        async function cpEliminar(folio) {
+            const c = (db.comprobantes || {})[folio];
+            if (!c) return;
+            const aviso = c.estado === 'usado'
+                ? ' OJO: el árbitro ya lo escaneó; al eliminarlo se pierde el registro de ese pago (el partido no se modifica).'
+                : '';
+            if (!(await confirmarAccion(`¿Eliminar el comprobante ${escapeHtml(folio)} de ${escapeHtml(c.equipoNombre)}?${aviso} Después presiona "📤 Publicar cambios" para que también se borre en la nube.`, { textoConfirmar: 'Eliminar' }))) return;
+            delete db.comprobantes[folio];
+            if (document.getElementById('modal-comprobante').style.display === 'flex') cpCerrar();
+            guardarDB();
+        }
+
+        function cpAviso(msg) {
+            let t = document.getElementById('cp-toast');
+            if (!t) {
+                t = document.createElement('div');
+                t.id = 'cp-toast';
+                t.style.cssText = 'position:fixed; bottom:18px; right:18px; background:#16a34a; color:#fff; padding:12px 16px; border-radius:10px; font-size:0.85rem; font-weight:bold; box-shadow:0 6px 18px rgba(0,0,0,0.3); z-index:100000; max-width:300px; opacity:0; transition:opacity .3s;';
+                document.body.appendChild(t);
+            }
+            t.textContent = msg;
+            t.style.opacity = '1';
+            clearTimeout(t._t);
+            t._t = setTimeout(function () { t.style.opacity = '0'; }, 7000);
+        }
+
+        // Los comprobantes viven en un nodo privado ("sub15_comprobantes"): solo lo lee/escribe el
+        // administrador (con contraseña) y el árbitro (que solo puede marcar uno como usado).
+        // Aquí se copia a la base local el estado "usado" que guardó el árbitro. En la primera lectura
+        // de cada sesión también se recuperan los comprobantes que existan en la nube y falten aquí.
+        let cpRef = null;
+        let cpPrimeraNube = true;
+        function cpAplicarNube(remotos) {
+            remotos = (remotos && typeof remotos === 'object') ? remotos : {};
+            cpNube = Object.keys(remotos);
+            if (!db.comprobantes) db.comprobantes = {};
+            let recuperados = 0;
+            if (cpPrimeraNube) {
+                cpPrimeraNube = false;
+                Object.keys(remotos).forEach(folio => {
+                    if (remotos[folio] && !db.comprobantes[folio]) { db.comprobantes[folio] = remotos[folio]; recuperados++; }
+                });
+            }
+            const escaneados = [];
+            Object.keys(remotos).forEach(folio => {
+                const r = remotos[folio], l = db.comprobantes[folio];
+                if (!r || !l) return;                       // si lo eliminaste aquí, no se vuelve a agregar
+                if (r.estado === 'usado' && l.estado !== 'usado') {
+                    l.estado = 'usado';
+                    l.usadoEn = r.usadoEn || '';
+                    l.usadoPor = r.usadoPor || '';
+                    l.usadoPartidoId = r.usadoPartidoId;
+                    escaneados.push(l);
+                }
+            });
+            if (escaneados.length || recuperados) {
+                try { localStorage.setItem('liga_sub15_db', JSON.stringify(db)); } catch (e) { }
+            }
+            if (escaneados.length) {
+                cpAviso('✅ ' + escaneados.map(c => c.folio + ' (' + c.equipoNombre + ')').join(', ') + ' ya fue escaneado por el árbitro.');
+            }
+            try { renderizarComprobantes(); } catch (e) { }
+            return escaneados.length;
+        }
+
+        function cpEscucharEscaneos() {
+            if (cpEscuchando) return;
+            try {
+                cpRef = firebase.database().ref('sub15_comprobantes');
+                cpEscuchando = true;
+                cpPrimeraNube = true;
+                cpRef.on('value', snap => cpAplicarNube(snap.val()),
+                    err => { cpEscuchando = false; console.warn('No se pudo escuchar los comprobantes (revisa las reglas de "sub15_comprobantes")', err && err.message); });
+            } catch (e) { cpEscuchando = false; console.warn(e); }
+        }
+
+        function cpDetenerEscaneos() {
+            try { if (cpRef) cpRef.off(); } catch (e) { }
+            cpRef = null; cpEscuchando = false; cpPrimeraNube = true; cpNube = null;
+        }
+
+        function cpRevisarEscaneos(btn) {
+            const txt = btn.textContent;
+            btn.disabled = true; btn.textContent = '⏳ Revisando...';
+            firebase.database().ref('sub15_comprobantes').once('value')
+                .then(snap => {
+                    const n = cpAplicarNube(snap.val());
+                    if (!n) cpAviso('Sin novedades: ningún comprobante nuevo escaneado.');
+                })
+                .catch(err => mostrarAlerta('No se pudo consultar la nube: ' + escapeHtml(err.message || err), { icono: '❌' }))
+                .then(() => { btn.disabled = false; btn.textContent = txt; });
+        }
+
+        // Trae todos los comprobantes del nodo privado y reemplaza los locales (se usa en "Traer de la nube").
+        function cpTraerPrivados() {
+            return firebase.database().ref('sub15_comprobantes').once('value')
+                .then(snap => {
+                    db.comprobantes = snap.val() || {};
+                    cpNube = Object.keys(db.comprobantes);
+                    try { localStorage.setItem('liga_sub15_db', JSON.stringify(db)); } catch (e) { }
+                    try { renderizarComprobantes(); } catch (e) { }
+                })
+                .catch(err => console.warn('No se pudieron traer los comprobantes (revisa las reglas de "sub15_comprobantes")', err && err.message));
+        }
+
+        // Se llama al publicar. Antes de sobrescribir el nodo privado se asegura de haber leído lo que
+        // ya hay en la nube, para no borrar comprobantes que el árbitro marcó como usados.
+        async function cpPublicarPrivados() {
+            try {
+                const ref = firebase.database().ref('sub15_comprobantes');
+                if (cpNube === null) cpAplicarNube((await ref.once('value')).val());
+                await ref.set(JSON.parse(JSON.stringify(db.comprobantes || {})));
+            } catch (err) {
+                console.warn('No se pudieron publicar los comprobantes', err);
+                cpAviso('⚠️ Se publicó el sitio, pero los comprobantes de pago no se pudieron publicar (revisa las reglas de Firebase para "sub15_comprobantes").');
+            }
+        }
+
+        async function cpAnular(folio) {
+            const c = (db.comprobantes || {})[folio];
+            if (!c || c.estado !== 'vigente') return;
+            if (!(await confirmarAccion(`¿Anular el comprobante ${folio} de ${escapeHtml(c.equipoNombre)}? Dejará de servir al escanearlo.`, { textoConfirmar: 'Anular comprobante' }))) return;
+            c.estado = 'anulado';
+            c.anuladoEn = new Date().toISOString();
+            guardarDB();
         }
 
         function toggleFinanza(eqId, campo) {
@@ -5197,7 +5849,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
                                 <p><strong>FECHA DE NACIMIENTO:</strong> ${formatearFechaCarnet(j.fechaNacimiento)}</p>
                                 <p><strong>FECHA DE EXPEDICIÓN:</strong> ${formatearFechaCarnet(c.fechaExpedicion)}</p>
                                 <p><strong>NACIONALIDAD:</strong> ${j.nacionalidad || 'MEXICANA'}</p>
-                                <p class="carnet-datos-liga">${c.nombreLiga || 'LIGA DE FUTBOL ACAPULCO'}</p>
+                                <p class="carnet-datos-liga">${c.nombreLiga || 'LIGA AMATILLO SUB 15 SABATINA'}</p>
                             </div>
                             <div class="carnet-pie">
                                 <div class="carnet-firmas">
@@ -5860,7 +6512,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
             texto(c.incidentes ? c.incidentes.replace(/\n/g, '  |  ') : 'Sin incidentes reportados.', { size: 9, gap: 8 });
 
             // Pago de arbitraje
-            texto(`Pago de arbitraje — ${loc}: ${p.arbitrajePagoLocal ? 'Pagado' : 'Pendiente'}    ${vis}: ${p.arbitrajePagoVisita ? 'Pagado' : 'Pendiente'}`, { size: 9, color: [110, 110, 110], gap: 9 });
+            texto(`Pago de arbitraje — ${loc}: ${p.arbitrajePagoLocal ? 'Pagado' : 'Pendiente'}${p.comprobantePagoLocal ? ' (comprobante ' + p.comprobantePagoLocal + ')' : ''}    ${vis}: ${p.arbitrajePagoVisita ? 'Pagado' : 'Pendiente'}${p.comprobantePagoVisita ? ' (comprobante ' + p.comprobantePagoVisita + ')' : ''}`, { size: 9, color: [110, 110, 110], gap: 9 });
 
             // Firmas
             saltoDePagina(55);
@@ -6458,12 +7110,12 @@ ${cuerpo}`;
                 const iconoTipo = { aviso: '📢', sancion: '⚠️', cronica: '📰', registro: '🆕', traspaso: '🔄' };
                 listaComunicados.innerHTML = (db.comunicados || []).length ? db.comunicados.map(c => {
                     const horasRestantes = Math.max(0, Math.ceil((DURACION_AVISO_MS - (Date.now() - momentoAviso(c))) / (60 * 60 * 1000)));
-                    const notaAuto = ` · <span style="color:#888;">se quita solo en ${horasRestantes} h</span>`;
+                    const notaAuto = (c.tipo === 'sancion' && c.jugadorId) ? ' · <span style="color:#888;">permanece hasta que el jugador quede habilitado</span>' : ` · <span style="color:#888;">se quita solo en ${horasRestantes} h</span>`;
                     const esEditable = c.tipo === 'aviso' || c.tipo === 'sancion';
                     return `
                     <div class="gestion-fila">
                         <div class="gestion-info">
-                            <strong>${iconoTipo[c.tipo] || '📢'} ${c.titulo}</strong>
+                            <strong>${c.soloImagen ? '🖼️ Solo imagen' : (iconoTipo[c.tipo] || '📢') + ' ' + c.titulo}</strong>
                             <span>${c.fecha || ''}${notaAuto}</span>
                         </div>
                         <div class="gestion-acciones">
@@ -6733,8 +7385,10 @@ ${cuerpo}`;
         async function eliminarJugador(id) {
             const j = db.jugadores.find(x => x.id === id);
             if (!j) return;
+            if (!(await permitirFueraDePeriodo('dar de baja al jugador'))) return;
             if (!(await confirmarAccion(`¿Eliminar al jugador "${escapeHtml(j.nombre)}"? Sus goles, tarjetas y MVPs históricos en partidos ya jugados se conservarán en el registro del partido, pero desaparecerá del plantel.`, { textoConfirmar: 'Eliminar' }))) return;
             db.jugadores = db.jugadores.filter(x => x.id !== id);
+            eliminarTutorPrivado(id);
             guardarDB();
             alert("Jugador eliminado.");
         }
@@ -6777,6 +7431,7 @@ ${cuerpo}`;
             document.getElementById('com-tipo').value = c.tipo || 'aviso';
             document.getElementById('com-contenido').value = c.contenido || '';
             document.getElementById('com-foto').value = '';
+            document.getElementById('com-solo-imagen').checked = !!c.soloImagen; alternarSoloImagenComunicado();
             document.getElementById('nota-foto-actual-comunicado').style.display = c.imagen ? 'block' : 'none';
             document.getElementById('titulo-form-comunicado').innerText = '✏️ Editando Aviso';
             document.getElementById('btn-submit-comunicado').innerText = '💾 Guardar Cambios';
@@ -6785,9 +7440,16 @@ ${cuerpo}`;
             document.getElementById('form-comunicado').scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
+        function alternarSoloImagenComunicado() {
+            const solo = document.getElementById('com-solo-imagen').checked;
+            const t = document.getElementById('com-titulo'), k = document.getElementById('com-tipo'), x = document.getElementById('com-contenido');
+            [t, k, x].forEach(el => { el.style.display = solo ? 'none' : ''; });
+            t.required = !solo; x.required = !solo;
+            document.getElementById('com-label-foto').innerText = solo ? 'Imagen a publicar:' : 'Portada:';
+        }
         function cancelarEdicionComunicado() {
             document.getElementById('editcom-id').value = '';
-            document.getElementById('form-comunicado').reset();
+            document.getElementById('form-comunicado').reset(); alternarSoloImagenComunicado();
             document.getElementById('titulo-form-comunicado').innerText = 'Publicar Anuncio / Sanción';
             document.getElementById('btn-submit-comunicado').innerText = 'Publicar en Tablón';
             document.getElementById('btn-cancelar-edicion-comunicado').style.display = 'none';
@@ -7113,7 +7775,7 @@ ${cuerpo}`;
     <script>
         /* ===== Secciones tipo ventana: cada caja del panel se abre/cierra con un clic ===== */
         (function () {
-            var CLAVE = 'liga_admin_ventanas_abiertas';
+            var CLAVE = 'liga_sub15_ventanas_abiertas';
             function leer() { try { return JSON.parse(localStorage.getItem(CLAVE) || '[]'); } catch (e) { return []; } }
             function guardar() {
                 try {
@@ -7193,7 +7855,7 @@ ${cuerpo}`;
 (function(){
 var PAGE='admin';
 var root=document.documentElement;
-function guardar(){try{localStorage.setItem('liga_theme',root.getAttribute('data-theme')==='dark'?'dark':'light');}catch(e){}}
+function guardar(){try{localStorage.setItem('liga_sub15_theme',root.getAttribute('data-theme')==='dark'?'dark':'light');}catch(e){}}
 new MutationObserver(guardar).observe(root,{attributes:true,attributeFilter:['data-theme']});
 /* ===== Skeleton ===== */
 var skelFin=false;

@@ -1,7 +1,7 @@
 {
-  "name": "Liga de Futbol Juvenil",
-  "short_name": "Liga Juvenil",
-  "description": "Sitio oficial de la Liga de Futbol Juvenil: tabla de posiciones, resultados en vivo, goleo y fichas de jugadores.",
+  "name": "Liga Amatillo Sub 15 Sabatina",
+  "short_name": "Liga Amatillo",
+  "description": "Sitio oficial de la Liga Amatillo Sub 15 Sabatina: tabla de posiciones, resultados en vivo, goleo y fichas de jugadores.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
