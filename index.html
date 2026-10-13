@@ -3336,7 +3336,9 @@ footer{border-top:5px solid var(--accent)}
             // Todas las publicaciones del Tablón se muestran solo 1 día; pasado ese tiempo se ocultan
             // aunque el dato aún no se haya borrado de la base. Si no tienen 'ts' se usa su id (hora de creación).
             const DURACION_AVISO_MS = 24 * 60 * 60 * 1000;
-            const comunicadosVigentes = (db.comunicados || []).filter(c => (c.tipo === 'sancion' && c.jugadorId) || (Date.now() - (c.ts || c.id || 0)) <= DURACION_AVISO_MS);
+            // Cada aviso puede durar los días que el admin eligió (c.duracionDias); si no trae, dura 1 día.
+            const duracionAvisoMs = c => Math.max(1, parseInt(c && c.duracionDias, 10) || 1) * DURACION_AVISO_MS;
+            const comunicadosVigentes = (db.comunicados || []).filter(c => (c.tipo === 'sancion' && c.jugadorId) || (Date.now() - (c.ts || c.id || 0)) <= duracionAvisoMs(c));
             // Equipos que menciona un aviso: "A vs B · ..." (partido programado) o cualquier equipo nombrado en el texto.
             const normNom = t => String(t || '').toLowerCase().replace(/\s+/g, ' ').trim();
             const equiposDeAviso = (c) => {

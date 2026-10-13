@@ -1154,6 +1154,16 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
                     <option value="sancion">⚠️ Dictamen Disciplinario</option>
                 </select>
                 <textarea id="com-contenido" rows="3" placeholder="Redactar el texto aquí..." required></textarea>
+                <label for="com-duracion">⏳ ¿Cuántos días dura publicado en el Tablón?</label>
+                <select id="com-duracion">
+                    <option value="1">1 día (24 horas)</option>
+                    <option value="2">2 días</option>
+                    <option value="3">3 días</option>
+                    <option value="5">5 días</option>
+                    <option value="7">7 días (1 semana)</option>
+                    <option value="15">15 días</option>
+                    <option value="30">30 días (1 mes)</option>
+                </select>
                 <label id="com-label-foto">Portada:</label>
                 <input type="file" id="com-foto" accept="image/*">
                 <small id="nota-foto-actual-comunicado" style="display:none; color:#888;">Deja este campo vacío para conservar la imagen actual.</small>
@@ -3352,8 +3362,10 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
         // TODAS las publicaciones del Tablón (los avisos automáticos de registro/traspaso y los
         // anuncios manuales del formulario "Publicar Anuncio") duran 1 día y luego se quitan solas.
         // Para avisos antiguos sin 'ts' se usa su id, que es la hora en que se crearon.
+        // Cada aviso puede traer su propia duración en días (c.duracionDias); si no la trae, dura 1 día.
         const DURACION_AVISO_MS = 24 * 60 * 60 * 1000;
         function momentoAviso(c) { return c.ts || c.id || 0; }
+        function duracionAvisoMs(c) { return Math.max(1, parseInt(c && c.duracionDias, 10) || 1) * DURACION_AVISO_MS; }
 
         // Formato de captura: nombre de equipo EN MAYÚSCULAS; nombres de personas con Inicial Mayúscula.
         function aMayusculasEquipo(t) { return String(t || '').replace(/\s+/g, ' ').trim().toLocaleUpperCase('es'); }
@@ -3390,7 +3402,7 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
 
         function limpiarAvisosExpirados() {
             if (!db.comunicados) return;
-            db.comunicados = db.comunicados.filter(c => (c.tipo === 'sancion' && c.jugadorId) || (Date.now() - momentoAviso(c)) <= DURACION_AVISO_MS);
+            db.comunicados = db.comunicados.filter(c => (c.tipo === 'sancion' && c.jugadorId) || (Date.now() - momentoAviso(c)) <= duracionAvisoMs(c));
         }
 
         limpiarAvisosExpirados();
@@ -4549,12 +4561,15 @@ button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--btn-s)}
                     c.tipo = soloImagen ? 'aviso' : document.getElementById('com-tipo').value;
                     c.contenido = soloImagen ? '' : document.getElementById('com-contenido').value.trim();
                     if (fotoB64) c.imagen = fotoB64;
+                    const nuevaDuracion = parseInt(document.getElementById('com-duracion').value, 10) || 1;
+                    if ((parseInt(c.duracionDias, 10) || 1) !== nuevaDuracion) { c.duracionDias = nuevaDuracion; c.ts = Date.now(); }  // si cambias los días, el conteo vuelve a empezar desde ahora
                     cancelarEdicionComunicado();
                     guardarDB();
                     alert("Aviso actualizado.");
                 } else {
-                    db.comunicados.unshift({ id: Date.now(), soloImagen: soloImagen, titulo: soloImagen ? '' : document.getElementById('com-titulo').value.trim(), tipo: soloImagen ? 'aviso' : document.getElementById('com-tipo').value, contenido: soloImagen ? '' : document.getElementById('com-contenido').value.trim(), imagen: fotoB64, fecha: new Date().toLocaleDateString('es-MX'), ts: Date.now() });
-                    this.reset(); alternarSoloImagenComunicado(); guardarDB(); alert("Anuncio publicado. Se quitará solo en 24 horas.");
+                    db.comunicados.unshift({ id: Date.now(), soloImagen: soloImagen, titulo: soloImagen ? '' : document.getElementById('com-titulo').value.trim(), tipo: soloImagen ? 'aviso' : document.getElementById('com-tipo').value, contenido: soloImagen ? '' : document.getElementById('com-contenido').value.trim(), imagen: fotoB64, fecha: new Date().toLocaleDateString('es-MX'), ts: Date.now(), duracionDias: parseInt(document.getElementById('com-duracion').value, 10) || 1 });
+                    const diasPub = parseInt(document.getElementById('com-duracion').value, 10) || 1;
+                    this.reset(); alternarSoloImagenComunicado(); guardarDB(); alert("Anuncio publicado. Se quitará solo en " + (diasPub === 1 ? "24 horas." : diasPub + " días."));
                 }
             });
 
@@ -7157,8 +7172,9 @@ ${cuerpo}`;
             if (listaComunicados) {
                 const iconoTipo = { aviso: '📢', sancion: '⚠️', cronica: '📰', registro: '🆕', traspaso: '🔄' };
                 listaComunicados.innerHTML = (db.comunicados || []).length ? db.comunicados.map(c => {
-                    const horasRestantes = Math.max(0, Math.ceil((DURACION_AVISO_MS - (Date.now() - momentoAviso(c))) / (60 * 60 * 1000)));
-                    const notaAuto = (c.tipo === 'sancion' && c.jugadorId) ? ' · <span style="color:#888;">permanece hasta que el jugador quede habilitado</span>' : ` · <span style="color:#888;">se quita solo en ${horasRestantes} h</span>`;
+                    const horasRestantes = Math.max(0, Math.ceil((duracionAvisoMs(c) - (Date.now() - momentoAviso(c))) / (60 * 60 * 1000)));
+                    const textoRestante = horasRestantes > 48 ? Math.ceil(horasRestantes / 24) + ' días' : horasRestantes + ' h';
+                    const notaAuto = (c.tipo === 'sancion' && c.jugadorId) ? ' · <span style="color:#888;">permanece hasta que el jugador quede habilitado</span>' : ` · <span style="color:#888;">se quita solo en ${textoRestante}</span>`;
                     const esEditable = c.tipo === 'aviso' || c.tipo === 'sancion';
                     return `
                     <div class="gestion-fila">
@@ -7479,6 +7495,7 @@ ${cuerpo}`;
             document.getElementById('com-tipo').value = c.tipo || 'aviso';
             document.getElementById('com-contenido').value = c.contenido || '';
             document.getElementById('com-foto').value = '';
+            document.getElementById('com-duracion').value = String(parseInt(c.duracionDias, 10) || 1);
             document.getElementById('com-solo-imagen').checked = !!c.soloImagen; alternarSoloImagenComunicado();
             document.getElementById('nota-foto-actual-comunicado').style.display = c.imagen ? 'block' : 'none';
             document.getElementById('titulo-form-comunicado').innerText = '✏️ Editando Aviso';
